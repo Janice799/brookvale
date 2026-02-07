@@ -1,0 +1,983 @@
+/* ==================== STAR NOTE STYLES ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+.star-note-app {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #0A0A1A 0%, #1A1A3E 50%, #2D2D5E 100%);
+    padding: 1rem;
+    padding-bottom: 3rem;
+    font-family: 'Nanum Gothic', sans-serif;
+    position: relative;
+}
+
+/* Starry Background */
+.star-note-app::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(1px 1px at 5% 15%, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(2px 2px at 15% 45%, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 25% 25%, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(1px 1px at 35% 75%, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(2px 2px at 55% 35%, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(1px 1px at 65% 85%, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 75% 15%, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(2px 2px at 85% 55%, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(1px 1px at 95% 95%, rgba(255, 255, 255, 0.7), transparent);
+    animation: twinkle 6s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 0.8;
+    }
+}
+
+.star-note-app>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+.star-note-app .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+}
+
+.star-note-app .back-link {
+    color: #FFD700;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.2s;
+}
+
+.star-note-app .back-link:hover {
+    transform: translateX(-4px);
+}
+
+.star-note-app h1 {
+    font-size: 1.4rem;
+    color: #F5F5F5;
+    margin: 0;
+}
+
+.star-note-app .acorn-badge {
+    background: linear-gradient(135deg, #8D6E63, #5D4037);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+/* Language Toggle */
+.star-note-app .language-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.star-note-app .lang-btn {
+    padding: 0.5rem 1.5rem;
+    border: 2px solid #FFD700;
+    background: transparent;
+    color: #FFD700;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.star-note-app .lang-btn.active {
+    background: #FFD700;
+    color: #1A1A3E;
+}
+
+/* Sky Section */
+.star-note-app .sky-section {
+    margin-bottom: 1.5rem;
+}
+
+.star-note-app .star-sky {
+    height: 200px;
+    background: radial-gradient(ellipse at center, rgba(30, 30, 80, 0.8) 0%, rgba(10, 10, 26, 0.9) 100%);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.star-note-app .sky-star {
+    position: absolute;
+    font-size: 1.25rem;
+    animation: star-twinkle 2s ease-in-out infinite;
+}
+
+@keyframes star-twinkle {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.star-note-app .empty-sky-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    opacity: 0.3;
+    margin: 0;
+}
+
+.star-note-app .add-star-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #1A1A3E;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.4);
+}
+
+.star-note-app .add-star-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(255, 215, 0, 0.5);
+}
+
+/* Stats Section */
+.star-note-app .stats-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.star-note-app .stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.star-note-app .stat-icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.star-note-app .stat-emoji {
+    font-size: 2rem;
+    display: block;
+}
+
+.star-note-app .stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #FFD700;
+    display: block;
+}
+
+.star-note-app .stat-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Constellations Section */
+.star-note-app .constellations-section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.star-note-app .constellations-section h2 {
+    color: #F5F5F5;
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+}
+
+.star-note-app .constellation-list {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+}
+
+.star-note-app .constellation-card {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    min-width: 120px;
+    text-align: center;
+}
+
+.star-note-app .constellation-name {
+    color: #FFD700;
+    font-weight: 700;
+    display: block;
+    font-size: 0.875rem;
+}
+
+.star-note-app .constellation-count {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
+}
+
+/* Stars Section */
+.star-note-app .stars-section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.star-note-app .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.star-note-app .section-header h2 {
+    color: #F5F5F5;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.star-note-app .create-constellation-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 215, 0, 0.5);
+    color: #FFD700;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+}
+
+.star-note-app .create-constellation-btn:hover {
+    background: rgba(255, 215, 0, 0.2);
+}
+
+.star-note-app .empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.star-note-app .empty-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.star-note-app .star-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.star-note-app .star-card {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    padding: 1rem;
+    border-left: 4px solid;
+}
+
+.star-note-app .star-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.star-note-app .star-emoji {
+    font-size: 1.5rem;
+}
+
+.star-note-app .star-meta {
+    flex: 1;
+}
+
+.star-note-app .star-date {
+    display: block;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+}
+
+.star-note-app .brightness {
+    font-size: 0.75rem;
+}
+
+.star-note-app .star-card .delete-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(239, 83, 80, 0.3);
+    color: #EF5350;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.star-note-app .star-card:hover .delete-btn {
+    opacity: 1;
+}
+
+.star-note-app .delete-btn:hover {
+    background: #EF5350;
+    color: white;
+}
+
+.star-note-app .star-content {
+    color: #F5F5F5;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Motivation Section */
+.star-note-app .motivation-section {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.star-note-app .motivation-section p {
+    margin: 0;
+    color: #FFD700;
+    font-weight: 600;
+}
+
+/* Modal */
+.star-note-app .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.star-note-app .modal-content {
+    background: linear-gradient(180deg, #1A1A3E, #2D2D5E);
+    border-radius: 24px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.star-note-app .modal-content h2 {
+    margin: 0 0 1.5rem 0;
+    color: #F5F5F5;
+    text-align: center;
+}
+
+.star-note-app .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.star-note-app .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #FFD700;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.star-note-app .form-group textarea,
+.star-note-app .form-group input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    font-size: 1rem;
+    color: white;
+    transition: border-color 0.3s;
+    font-family: inherit;
+}
+
+.star-note-app .form-group textarea {
+    resize: none;
+}
+
+.star-note-app .form-group textarea::placeholder,
+.star-note-app .form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.star-note-app .form-group textarea:focus,
+.star-note-app .form-group input:focus {
+    outline: none;
+    border-color: #FFD700;
+}
+
+.star-note-app .category-picker {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.star-note-app .category-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.star-note-app .category-btn.active {
+    transform: scale(1.15);
+}
+
+.star-note-app .brightness-picker {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.star-note-app .brightness-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    opacity: 0.3;
+}
+
+.star-note-app .brightness-btn.active {
+    opacity: 1;
+    background: rgba(255, 215, 0, 0.2);
+}
+
+.star-note-app .constellation-star-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.star-note-app .picker-star {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s;
+}
+
+.star-note-app .picker-star.selected {
+    background: rgba(255, 215, 0, 0.2);
+}
+
+.star-note-app .picker-preview {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+}
+
+.star-note-app .modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.star-note-app .cancel-btn {
+    padding: 1rem;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: #F5F5F5;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.star-note-app .cancel-btn:hover {
+    background: rgba(239, 83, 80, 0.3);
+}
+
+.star-note-app .save-btn {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #1A1A3E;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.star-note-app .save-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+
+.star-note-app .save-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Reward Toast */
+.star-note-app .reward-toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #1A1A3E;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
+    z-index: 2000;
+    animation: toast-appear 0.5s ease-out;
+}
+
+@keyframes toast-appear {
+    from {
+        transform: translateX(-50%) translateY(-100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.star-note-app .toast-icon {
+    font-size: 2rem;
+}
+
+.star-note-app .toast-title {
+    font-weight: 700;
+}
+
+.star-note-app .toast-reward {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* ==================== ENHANCED HEADER ==================== */
+.star-note-app .header-right {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.star-note-app .icon-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255, 215, 0, 0.15);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.star-note-app .icon-btn:hover {
+    background: rgba(255, 215, 0, 0.3);
+    transform: scale(1.1);
+}
+
+/* ==================== ENHANCED STATS ==================== */
+.star-note-app .stats-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.star-note-app .stat-card.highlight {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 165, 0, 0.2));
+}
+
+/* ==================== FILTER SECTION ==================== */
+.star-note-app .filter-section {
+    margin-bottom: 1.5rem;
+}
+
+.star-note-app .search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    font-size: 0.9rem;
+    color: white;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+}
+
+.star-note-app .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.star-note-app .search-input:focus {
+    outline: none;
+    border-color: #FFD700;
+}
+
+.star-note-app .filter-chips {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.star-note-app .filter-chip {
+    padding: 0.5rem 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.star-note-app .filter-chip:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.star-note-app .filter-chip.active {
+    background: rgba(255, 215, 0, 0.2);
+    border-color: #FFD700;
+    color: #FFD700;
+}
+
+/* ==================== STAR CARD ENHANCED ==================== */
+.star-note-app .star-actions {
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+.star-note-app .star-card:hover .star-actions {
+    opacity: 1;
+}
+
+.star-note-app .view-btn {
+    padding: 0.25rem 0.75rem;
+    background: rgba(255, 215, 0, 0.2);
+    border: none;
+    border-radius: 8px;
+    color: #FFD700;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.star-note-app .view-btn:hover {
+    background: rgba(255, 215, 0, 0.4);
+}
+
+.star-note-app .star-mood {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+}
+
+/* ==================== SKY STAR CLICKABLE ==================== */
+.star-note-app .sky-star {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.star-note-app .sky-star:hover {
+    transform: scale(1.5) !important;
+}
+
+/* ==================== CLOSE BUTTON ==================== */
+.star-note-app .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.star-note-app .close-btn:hover {
+    background: rgba(239, 83, 80, 0.3);
+}
+
+.star-note-app .modal-content {
+    position: relative;
+}
+
+/* ==================== MOOD PICKER ==================== */
+.star-note-app .mood-picker {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.star-note-app .mood-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.star-note-app .mood-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.star-note-app .mood-btn.active {
+    border-color: #FFD700;
+    background: rgba(255, 215, 0, 0.2);
+    transform: scale(1.1);
+}
+
+/* ==================== STATS MODAL ==================== */
+.star-note-app .stats-overview {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.star-note-app .overview-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.star-note-app .overview-card.highlight {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 165, 0, 0.2));
+}
+
+.star-note-app .overview-card .ov-icon {
+    font-size: 1.5rem;
+}
+
+.star-note-app .overview-card .ov-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #FFD700;
+}
+
+.star-note-app .overview-card .ov-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ==================== CATEGORY BREAKDOWN ==================== */
+.star-note-app .category-breakdown {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 16px;
+}
+
+.star-note-app .category-breakdown h3 {
+    font-size: 0.9rem;
+    color: #FFD700;
+    margin: 0 0 1rem 0;
+}
+
+.star-note-app .breakdown-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.star-note-app .breakdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.star-note-app .breakdown-emoji {
+    font-size: 1.25rem;
+    width: 30px;
+}
+
+.star-note-app .breakdown-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.star-note-app .breakdown-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.star-note-app .breakdown-count {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    min-width: 24px;
+    text-align: right;
+}
+
+/* ==================== DETAIL MODAL ==================== */
+.star-note-app .detail-modal {
+    text-align: center;
+}
+
+.star-note-app .detail-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.star-note-app .detail-emoji {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+}
+
+.star-note-app .detail-category {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.star-note-app .detail-brightness {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.star-note-app .detail-content {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    border-radius: 16px;
+    color: #F5F5F5;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.star-note-app .detail-mood {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.star-note-app .detail-date {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+}
+
+/* ==================== MOBILE RESPONSIVE ==================== */
+@media (max-width: 480px) {
+    .star-note-app .stats-section {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .star-note-app .stat-card {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .star-note-app .stat-icon {
+        font-size: 1.25rem;
+    }
+
+    .star-note-app .stat-value {
+        font-size: 1.5rem;
+    }
+
+    .star-note-app .filter-chips {
+        justify-content: center;
+    }
+
+    .star-note-app .star-actions {
+        opacity: 1;
+    }
+
+    .star-note-app .mood-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1.25rem;
+    }
+
+    .star-note-app .overview-card {
+        padding: 0.75rem;
+    }
+}

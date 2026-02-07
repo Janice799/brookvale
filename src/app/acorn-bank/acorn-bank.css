@@ -1,0 +1,793 @@
+/* ==================== ACORN BANK STYLES ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+.acorn-bank-app {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #3E2723 0%, #4E342E 50%, #5D4037 100%);
+    padding: 1rem;
+    padding-bottom: 2rem;
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+/* Header */
+.acorn-bank-app .app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+}
+
+.acorn-bank-app .app-header h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #FFD54F;
+}
+
+.acorn-bank-app .back-link {
+    color: #FFB74D;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.acorn-bank-app .header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.acorn-bank-app .lang-toggle {
+    padding: 0.25rem 0.5rem;
+    background: rgba(255, 183, 77, 0.15);
+    border: 1px solid rgba(255, 183, 77, 0.3);
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #FFB74D;
+    cursor: pointer;
+}
+
+.acorn-bank-app .acorn-badge {
+    background: linear-gradient(135deg, #8D6E63, #5D4037);
+    color: white;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Profile Section */
+.acorn-bank-app .profile-section {
+    background: linear-gradient(135deg, rgba(141, 110, 99, 0.3), rgba(93, 64, 55, 0.5));
+    border-radius: 20px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.acorn-bank-app .balance-display {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.acorn-bank-app .big-acorn {
+    font-size: 2.5rem;
+    animation: acorn-bounce 2s ease-in-out infinite;
+}
+
+@keyframes acorn-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.acorn-bank-app .balance-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.acorn-bank-app .balance-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.acorn-bank-app .balance-value {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #FFD700;
+    text-shadow: 0 2px 10px rgba(255, 215, 0, 0.4);
+}
+
+/* Level Display */
+.acorn-bank-app .level-display {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.acorn-bank-app .level-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #FFD54F, #FFA000);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(255, 160, 0, 0.4);
+}
+
+.acorn-bank-app .level-number {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #3E2723;
+}
+
+.acorn-bank-app .level-info {
+    flex: 1;
+}
+
+.acorn-bank-app .level-name {
+    display: block;
+    color: #FFD54F;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.acorn-bank-app .level-progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 0.3rem 0;
+}
+
+.acorn-bank-app .level-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FFD54F, #FFA000);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+.acorn-bank-app .level-next {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Stats Row */
+.acorn-bank-app .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.acorn-bank-app .stat-mini {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 0.6rem;
+    text-align: center;
+}
+
+.acorn-bank-app .stat-mini.highlight {
+    background: rgba(76, 175, 80, 0.15);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.acorn-bank-app .stat-mini .stat-emoji {
+    font-size: 1rem;
+    display: block;
+}
+
+.acorn-bank-app .stat-mini .stat-value {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #FFD700;
+    display: block;
+}
+
+.acorn-bank-app .stat-mini .stat-label {
+    font-size: 0.55rem;
+    color: rgba(255, 255, 255, 0.4);
+    display: block;
+}
+
+/* Tab Nav */
+.acorn-bank-app .tab-nav {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 14px;
+    padding: 0.25rem;
+}
+
+.acorn-bank-app .tab-btn {
+    flex: 1;
+    padding: 0.5rem;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 700;
+    font-size: 0.7rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.acorn-bank-app .tab-btn.active {
+    background: rgba(255, 213, 79, 0.2);
+    color: #FFD54F;
+}
+
+/* Tab Content */
+.acorn-bank-app .tab-content {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 1rem;
+    min-height: 250px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Shop Filter */
+.acorn-bank-app .shop-filter {
+    display: flex;
+    gap: 0.3rem;
+    overflow-x: auto;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.3rem;
+    -webkit-overflow-scrolling: touch;
+}
+
+.acorn-bank-app .shop-filter::-webkit-scrollbar {
+    display: none;
+}
+
+.acorn-bank-app .filter-pill {
+    padding: 0.3rem 0.6rem;
+    border: 1px solid #E0E0E0;
+    background: white;
+    border-radius: 12px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s;
+    color: #666;
+}
+
+.acorn-bank-app .filter-pill.active {
+    background: #FFF3E0;
+    border-color: #FF9800;
+    color: #E65100;
+}
+
+/* Shop Grid */
+.acorn-bank-app .shop-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+}
+
+.acorn-bank-app .shop-item {
+    padding: 0.75rem;
+    background: white;
+    border-radius: 14px;
+    border: 1px solid #F0F0F0;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.acorn-bank-app .shop-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.acorn-bank-app .shop-item.owned {
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+.acorn-bank-app .shop-item.cant-afford {
+    opacity: 0.6;
+}
+
+.acorn-bank-app .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.3rem;
+}
+
+.acorn-bank-app .item-emoji {
+    font-size: 1.5rem;
+}
+
+.acorn-bank-app .rarity-badge {
+    font-size: 0.5rem;
+    padding: 0.1rem 0.35rem;
+    border-radius: 6px;
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.acorn-bank-app .item-name {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.15rem;
+}
+
+.acorn-bank-app .item-desc {
+    display: block;
+    font-size: 0.6rem;
+    color: #999;
+    margin-bottom: 0.4rem;
+}
+
+.acorn-bank-app .buy-btn {
+    padding: 0.35rem 0.75rem;
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.acorn-bank-app .buy-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.acorn-bank-app .owned-badge {
+    color: #4CAF50;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+/* Savings Tab */
+.acorn-bank-app .savings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.acorn-bank-app .savings-header h3 {
+    margin: 0;
+    color: #5D4037;
+    font-size: 0.95rem;
+}
+
+.acorn-bank-app .add-goal-btn {
+    padding: 0.35rem 0.75rem;
+    background: linear-gradient(135deg, #FF9800, #F57C00);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+/* Add Goal Form */
+.acorn-bank-app .add-goal-form {
+    background: #FFF3E0;
+    border-radius: 14px;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.acorn-bank-app .emoji-picker {
+    display: flex;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.acorn-bank-app .emoji-btn {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #E0E0E0;
+    background: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.acorn-bank-app .emoji-btn.active {
+    border-color: #FF9800;
+    background: #FFF3E0;
+}
+
+.acorn-bank-app .goal-input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #E0E0E0;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+    box-sizing: border-box;
+}
+
+.acorn-bank-app .goal-input:focus {
+    outline: none;
+    border-color: #FF9800;
+}
+
+.acorn-bank-app .save-goal-btn {
+    width: 100%;
+    padding: 0.5rem;
+    background: linear-gradient(135deg, #4CAF50, #388E3C);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* Savings Goal Card */
+.acorn-bank-app .goals-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.acorn-bank-app .savings-goal-card {
+    background: white;
+    border-radius: 14px;
+    padding: 0.75rem;
+    border: 1px solid #F0F0F0;
+}
+
+.acorn-bank-app .savings-goal-card.complete {
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+.acorn-bank-app .sg-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.acorn-bank-app .sg-emoji {
+    font-size: 1.5rem;
+}
+
+.acorn-bank-app .sg-info {
+    flex: 1;
+}
+
+.acorn-bank-app .sg-name {
+    display: block;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.acorn-bank-app .sg-amount {
+    display: block;
+    font-size: 0.7rem;
+    color: #888;
+}
+
+.acorn-bank-app .sg-complete {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #4CAF50;
+}
+
+.acorn-bank-app .sg-bar {
+    height: 8px;
+    background: #F0F0F0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.acorn-bank-app .sg-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FFD54F, #FF9800);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.acorn-bank-app .sg-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.acorn-bank-app .deposit-btn {
+    padding: 0.3rem 0.75rem;
+    background: #FFF3E0;
+    border: 1px solid #FF9800;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #E65100;
+    cursor: pointer;
+}
+
+.acorn-bank-app .deposit-form {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+}
+
+.acorn-bank-app .deposit-input {
+    width: 80px;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 0.8rem;
+}
+
+.acorn-bank-app .deposit-confirm-btn,
+.acorn-bank-app .deposit-cancel-btn {
+    padding: 0.3rem 0.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.acorn-bank-app .deposit-confirm-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+.acorn-bank-app .deposit-cancel-btn {
+    background: #F0F0F0;
+}
+
+/* Top Sources */
+.acorn-bank-app .top-sources {
+    margin-bottom: 1rem;
+}
+
+.acorn-bank-app .top-sources h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    color: #5D4037;
+}
+
+.acorn-bank-app .source-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.4rem;
+}
+
+.acorn-bank-app .source-rank {
+    font-size: 0.65rem;
+    color: #999;
+    font-weight: 700;
+    width: 20px;
+}
+
+.acorn-bank-app .source-name {
+    font-size: 0.75rem;
+    color: #333;
+    font-weight: 600;
+    width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.acorn-bank-app .source-bar {
+    flex: 1;
+    height: 8px;
+    background: #F5F5F5;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.acorn-bank-app .source-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FFD54F, #FF9800);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.acorn-bank-app .source-amount {
+    font-size: 0.65rem;
+    color: #999;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* History List */
+.acorn-bank-app .history-tab h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    color: #5D4037;
+}
+
+.acorn-bank-app .history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.acorn-bank-app .transaction-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.6rem;
+    background: #FAFAFA;
+    border-radius: 10px;
+}
+
+.acorn-bank-app .tx-icon {
+    font-size: 1rem;
+}
+
+.acorn-bank-app .tx-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.acorn-bank-app .tx-source {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.acorn-bank-app .tx-date {
+    display: block;
+    font-size: 0.6rem;
+    color: #999;
+}
+
+.acorn-bank-app .tx-amount {
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.acorn-bank-app .tx-amount.earn {
+    color: #4CAF50;
+}
+
+.acorn-bank-app .tx-amount.spend {
+    color: #FF5722;
+}
+
+/* Achievements List */
+.acorn-bank-app .achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.acorn-bank-app .achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: #F5F5F5;
+    border-radius: 14px;
+    transition: all 0.3s;
+}
+
+.acorn-bank-app .achievement-item.unlocked {
+    background: linear-gradient(135deg, #FFF8E1, #FFF3E0);
+    border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
+.acorn-bank-app .achievement-item.locked {
+    opacity: 0.6;
+}
+
+.acorn-bank-app .ach-emoji {
+    font-size: 1.5rem;
+}
+
+.acorn-bank-app .ach-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.acorn-bank-app .ach-name {
+    display: block;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #333;
+}
+
+.acorn-bank-app .ach-desc {
+    display: block;
+    font-size: 0.65rem;
+    color: #999;
+}
+
+.acorn-bank-app .ach-status {
+    font-size: 0.7rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.acorn-bank-app .ach-status.unlocked {
+    color: #4CAF50;
+}
+
+.acorn-bank-app .ach-status.locked {
+    color: #999;
+}
+
+/* Empty State */
+.acorn-bank-app .empty-state {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: #999;
+}
+
+.acorn-bank-app .empty-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+/* Toast */
+.acorn-bank-app .purchase-toast {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #5D4037, #3E2723);
+    color: #FFD54F;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    z-index: 2000;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    animation: toast-appear 0.5s ease-out;
+}
+
+@keyframes toast-appear {
+    from {
+        transform: translateX(-50%) translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .acorn-bank-app .stats-row {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .acorn-bank-app .shop-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

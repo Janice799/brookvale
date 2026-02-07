@@ -1,0 +1,1307 @@
+/* ==================== TINY WINS GARDEN STYLES ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+.tiny-wins-app {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
+    font-family: 'Nunito', 'Nanum Gothic', sans-serif;
+    padding: 1rem;
+    padding-bottom: 3rem;
+    position: relative;
+}
+
+/* ==================== HEADER ==================== */
+.tiny-wins-app .app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.tiny-wins-app .back-link {
+    color: #2e7d32;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    background: rgba(46, 125, 50, 0.1);
+    border-radius: 12px;
+    transition: all 0.2s;
+}
+
+.tiny-wins-app .back-link:hover {
+    background: rgba(46, 125, 50, 0.2);
+}
+
+.tiny-wins-app .app-header h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1b5e20;
+    margin: 0;
+}
+
+.acorn-badge {
+    background: linear-gradient(135deg, #fff8e1, #ffecb3);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    color: #8B4513;
+    font-size: 0.95rem;
+}
+
+/* ==================== LANGUAGE TOGGLE ==================== */
+.tiny-wins-app .language-toggle {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    display: flex;
+    gap: 0.25rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.25rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.tiny-wins-app .lang-btn {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: transparent;
+    color: #66bb6a;
+}
+
+.tiny-wins-app .lang-btn.active {
+    background: linear-gradient(135deg, #66bb6a, #43a047);
+    color: white;
+}
+
+/* ==================== GARDEN DISPLAY ==================== */
+.garden-display {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 24px;
+    padding: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.tree-container {
+    margin-bottom: 1.5rem;
+}
+
+.tree {
+    font-size: 5rem;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    animation: treeFloat 3s ease-in-out infinite;
+    transition: transform 0.3s;
+}
+
+.tree.growing {
+    animation: treeGrow 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes treeFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes treeGrow {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.tree-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2e7d32;
+}
+
+/* Progress Bar */
+.progress-section {
+    margin-bottom: 1.5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #66bb6a, #43a047);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+.progress-text {
+    font-size: 0.85rem;
+    color: #558b2f;
+    font-weight: 600;
+}
+
+/* Stats */
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #2e7d32;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #66bb6a;
+    font-weight: 600;
+}
+
+/* ==================== ADD HABIT ==================== */
+.add-habit-section {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.add-habit-form {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.emoji-picker-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    border: 2px dashed #a5d6a7;
+    border-radius: 14px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.emoji-picker-btn:hover {
+    border-color: #66bb6a;
+    transform: scale(1.05);
+}
+
+.add-habit-form input {
+    flex: 1;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #c8e6c9;
+    border-radius: 14px;
+    outline: none;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.add-habit-form input:focus {
+    border-color: #66bb6a;
+}
+
+.add-btn {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, #66bb6a, #43a047);
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.add-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(67, 160, 71, 0.3);
+}
+
+/* Emoji Picker */
+.emoji-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 16px;
+    animation: pickerSlide 0.2s ease;
+}
+
+@keyframes pickerSlide {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.emoji-option {
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background: #f5f5f5;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.emoji-option:hover {
+    background: #e8f5e9;
+}
+
+.emoji-option.selected {
+    border-color: #66bb6a;
+    background: #e8f5e9;
+}
+
+/* ==================== HABITS SECTION ==================== */
+.habits-section {
+    margin-bottom: 1.5rem;
+}
+
+.habits-section h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2e7d32;
+    margin-bottom: 1rem;
+}
+
+.empty-message {
+    text-align: center;
+    color: #66bb6a;
+    padding: 2rem;
+    font-size: 1rem;
+}
+
+.habit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+/* Habit Card */
+.habit-card {
+    background: linear-gradient(135deg, #ffffff, #f1f8e9);
+    border-radius: 20px;
+    padding: 1.25rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border: 3px solid transparent;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.habit-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: #a5d6a7;
+    box-shadow: 0 8px 25px rgba(102, 187, 106, 0.2);
+}
+
+.habit-card.completed {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border-color: #66bb6a;
+}
+
+.habit-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.habit-text {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+    word-break: break-word;
+}
+
+.habit-streak {
+    font-size: 0.8rem;
+    color: #ff7043;
+    font-weight: 600;
+}
+
+.habit-done-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 28px;
+    height: 28px;
+    background: #66bb6a;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 3px solid white;
+    animation: badgePop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes badgePop {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.habit-delete {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #888;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.habit-card:hover .habit-delete {
+    opacity: 1;
+}
+
+.habit-delete:hover {
+    background: #ff5252;
+    color: white;
+}
+
+/* ==================== CELEBRATION ==================== */
+.celebration {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #fff8e1, #ffecb3);
+    padding: 2rem 3rem;
+    border-radius: 24px;
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    border: 4px solid #ffd54f;
+    animation: celebrationPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes celebrationPop {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+    }
+
+    60% {
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.celebration-emoji {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    animation: celebrationBounce 0.6s ease-in-out;
+}
+
+@keyframes celebrationBounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.celebration-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #f57f17;
+}
+
+/* ==================== QUEST REWARD TOAST ==================== */
+.quest-reward-toast {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    border: 3px solid #66bb6a;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 1000;
+    box-shadow: 0 8px 25px rgba(102, 187, 106, 0.3);
+    animation: toastSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes toastSlide {
+    0% {
+        transform: translateX(-50%) translateY(-50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.toast-icon {
+    font-size: 1.5rem;
+}
+
+.toast-content {
+    text-align: left;
+}
+
+.toast-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #2e7d32;
+}
+
+.toast-reward {
+    font-size: 0.85rem;
+    color: #8B4513;
+    font-weight: 600;
+}
+
+/* ==================== MOTIVATION ==================== */
+.motivation {
+    text-align: center;
+    padding: 1.5rem;
+    color: #2e7d32;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 480px) {
+    .tiny-wins-app .app-header {
+        flex-direction: column;
+        gap: 0.75rem;
+        text-align: center;
+    }
+
+    .stats {
+        gap: 1rem;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .add-habit-form {
+        flex-wrap: wrap;
+    }
+
+    .add-habit-form input {
+        flex: 1 1 100%;
+        order: 2;
+    }
+
+    .emoji-picker-btn {
+        order: 1;
+    }
+
+    .add-btn {
+        order: 3;
+        flex: 1;
+    }
+
+    .habit-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tiny-wins-app .language-toggle {
+        top: auto;
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+/* ==================== ENHANCED HEADER ==================== */
+.tiny-wins-app .header-right {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.tiny-wins-app .icon-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tiny-wins-app .icon-btn:hover {
+    background: rgba(255, 255, 255, 0.95);
+    transform: scale(1.1);
+}
+
+/* ==================== STAT HIGHLIGHT ==================== */
+.tiny-wins-app .stat.highlight {
+    background: linear-gradient(135deg, #fff8e1, #ffecb3);
+    padding: 0.75rem 1rem;
+    border-radius: 16px;
+}
+
+/* ==================== ALL DONE BANNER ==================== */
+.all-done-banner {
+    background: linear-gradient(135deg, #c8e6c9, #a5d6a7);
+    padding: 1rem;
+    border-radius: 16px;
+    text-align: center;
+    font-weight: 800;
+    color: #1b5e20;
+    margin-bottom: 1.5rem;
+    animation: bannerPulse 2s ease-in-out infinite;
+}
+
+@keyframes bannerPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* ==================== CATEGORY BUTTON ==================== */
+.category-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    border: 2px dashed #a5d6a7;
+    border-radius: 14px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.category-btn:hover {
+    border-color: #66bb6a;
+    transform: scale(1.05);
+}
+
+/* ==================== CATEGORY PICKER ==================== */
+.category-picker {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 16px;
+    animation: pickerSlide 0.2s ease;
+}
+
+.category-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.75rem;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background: #f5f5f5;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #2e7d32;
+}
+
+.category-option:hover {
+    background: #e8f5e9;
+}
+
+.category-option.selected {
+    border-color: #66bb6a;
+    background: #e8f5e9;
+}
+
+.category-option span:first-child {
+    font-size: 1.5rem;
+}
+
+/* ==================== CATEGORY FILTER ==================== */
+.category-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 16px;
+    overflow-x: auto;
+}
+
+.filter-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #2e7d32;
+    white-space: nowrap;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-btn {
+    padding: 0.5rem 0.875rem;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #558b2f;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.filter-btn:hover {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #66bb6a, #43a047);
+    color: white;
+}
+
+/* ==================== ENHANCED HABIT CARD ==================== */
+.tiny-wins-app .habit-card {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+}
+
+.habit-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.25rem 1rem;
+    position: relative;
+}
+
+.habit-info {
+    text-align: center;
+}
+
+.habit-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.habit-category {
+    font-size: 0.9rem;
+}
+
+.habit-actions {
+    display: flex;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.habit-detail-btn {
+    flex: 1;
+    padding: 0.5rem;
+    border: none;
+    background: rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.habit-detail-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.tiny-wins-app .habit-card .habit-delete {
+    position: relative;
+    top: auto;
+    right: auto;
+    opacity: 1;
+    flex: 1;
+    padding: 0.5rem;
+    border: none;
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+    font-size: 1rem;
+    color: #888;
+    transition: all 0.2s;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+}
+
+.tiny-wins-app .habit-card .habit-delete:hover {
+    background: #ff5252;
+    color: white;
+}
+
+/* ==================== STREAK BONUS TOAST ==================== */
+.quest-reward-toast.streak-bonus {
+    background: linear-gradient(135deg, #fff8e1, #ffecb3);
+    border-color: #ff7043;
+}
+
+/* ==================== MODAL OVERLAY ==================== */
+.tiny-wins-app .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+    padding: 1rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.tiny-wins-app .modal-content {
+    background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+    padding: 2rem;
+    border-radius: 24px;
+    max-width: 450px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    animation: modalSlide 0.3s ease;
+}
+
+@keyframes modalSlide {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.tiny-wins-app .modal-content h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1b5e20;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.tiny-wins-app .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2e7d32;
+    transition: all 0.2s;
+}
+
+.tiny-wins-app .close-btn:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== STATS GRID ==================== */
+.tiny-wins-app .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.tiny-wins-app .stat-card {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1rem;
+    border-radius: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.tiny-wins-app .stat-card.highlight {
+    background: linear-gradient(135deg, #fff8e1, #ffecb3);
+}
+
+.tiny-wins-app .stat-card .stat-icon {
+    font-size: 1.5rem;
+}
+
+.tiny-wins-app .stat-card .stat-number {
+    font-size: 1.25rem;
+}
+
+.tiny-wins-app .stat-card .stat-label {
+    font-size: 0.75rem;
+}
+
+/* ==================== WEEKLY CHART ==================== */
+.weekly-chart-section {
+    margin-bottom: 1.5rem;
+}
+
+.weekly-chart-section h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2e7d32;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.tiny-wins-app .weekly-chart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 140px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    padding: 1rem;
+}
+
+.tiny-wins-app .chart-bar-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.tiny-wins-app .chart-bar-container.today {
+    background: rgba(102, 187, 106, 0.1);
+    border-radius: 8px;
+}
+
+.bar-wrapper {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 4px;
+}
+
+.tiny-wins-app .chart-bar {
+    width: 100%;
+    background: rgba(200, 200, 200, 0.5);
+    border-radius: 4px 4px 0 0;
+    min-height: 5px;
+    transition: height 0.3s ease;
+}
+
+.tiny-wins-app .chart-bar.active {
+    background: linear-gradient(135deg, #66bb6a, #43a047);
+}
+
+.tiny-wins-app .chart-day {
+    font-size: 0.75rem;
+    color: #558b2f;
+    font-weight: 700;
+    margin-top: 0.25rem;
+}
+
+.chart-count {
+    font-size: 0.7rem;
+    color: #888;
+}
+
+/* ==================== CATEGORY BREAKDOWN ==================== */
+.category-breakdown {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 1rem;
+    border-radius: 16px;
+}
+
+.category-breakdown h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2e7d32;
+    margin-bottom: 0.75rem;
+}
+
+.category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.category-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+}
+
+.cat-emoji {
+    font-size: 1.25rem;
+}
+
+.cat-name {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2e7d32;
+}
+
+.cat-progress {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #558b2f;
+}
+
+/* ==================== HABIT DETAIL MODAL ==================== */
+.habit-detail-modal .detail-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 1.25rem;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+}
+
+.detail-emoji {
+    font-size: 3rem;
+}
+
+.detail-info {
+    flex: 1;
+}
+
+.detail-text {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #1b5e20;
+}
+
+.detail-category {
+    display: block;
+    font-size: 0.9rem;
+    color: #558b2f;
+    margin-top: 0.25rem;
+}
+
+.detail-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.detail-stat {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1rem;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.detail-stat.highlight {
+    background: linear-gradient(135deg, #fff8e1, #ffecb3);
+}
+
+.detail-stat .value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1b5e20;
+}
+
+.detail-stat .label {
+    display: block;
+    font-size: 0.75rem;
+    color: #558b2f;
+    margin-top: 0.25rem;
+}
+
+.detail-created {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 1.5rem;
+}
+
+.detail-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.delete-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255, 82, 82, 0.1);
+    color: #ff5252;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.delete-btn:hover {
+    background: #ff5252;
+    color: white;
+}
+
+/* ==================== MOBILE RESPONSIVE FOR NEW ELEMENTS ==================== */
+@media (max-width: 480px) {
+    .tiny-wins-app .stats-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .tiny-wins-app .stat-card .stat-number {
+        font-size: 1rem;
+    }
+
+    .tiny-wins-app .modal-content {
+        padding: 1.5rem;
+        max-height: 85vh;
+    }
+
+    .detail-stats {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .detail-stat .value {
+        font-size: 1.25rem;
+    }
+
+    .category-filter {
+        padding: 0.5rem;
+    }
+
+    .filter-label {
+        display: none;
+    }
+}
+
+/* ==================== GROWTH STAGES VISUALIZATION ==================== */
+.growth-stages {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+    margin: 1rem 0;
+    overflow-x: auto;
+    gap: 0;
+}
+
+.growth-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.stage-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    border: 2px solid rgba(76, 175, 80, 0.2);
+    transition: all 0.3s ease;
+    filter: grayscale(80%);
+    opacity: 0.5;
+}
+
+.growth-stage.completed .stage-icon {
+    filter: grayscale(0%);
+    opacity: 1;
+    background: rgba(76, 175, 80, 0.2);
+    border-color: #4CAF50;
+}
+
+.growth-stage.current .stage-icon {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.2);
+    background: linear-gradient(135deg, #81C784, #66BB6A);
+    border-color: #4CAF50;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+    animation: currentPulse 2s ease-in-out infinite;
+}
+
+@keyframes currentPulse {
+
+    0%,
+    100% {
+        transform: scale(1.2);
+    }
+
+    50% {
+        transform: scale(1.3);
+    }
+}
+
+.stage-line {
+    position: absolute;
+    left: 36px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 4px;
+    background: rgba(76, 175, 80, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.growth-stage:last-child .stage-line {
+    display: none;
+}
+
+.stage-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #81C784);
+    border-radius: 2px;
+    transition: width 0.5s ease;
+}
+
+/* Mobile adjustments for growth stages */
+@media (max-width: 480px) {
+    .growth-stages {
+        gap: 0;
+        padding: 0.5rem 0;
+    }
+
+    .stage-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 0.95rem;
+    }
+
+    .stage-line {
+        width: 12px;
+        left: 28px;
+    }
+
+    .growth-stage.current .stage-icon {
+        transform: scale(1.15);
+    }
+
+    @keyframes currentPulse {
+
+        0%,
+        100% {
+            transform: scale(1.15);
+        }
+
+        50% {
+            transform: scale(1.25);
+        }
+    }
+}

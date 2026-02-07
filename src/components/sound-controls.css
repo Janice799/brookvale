@@ -1,0 +1,391 @@
+/* ========================================
+   Brookvale Sound Controls
+   Glassmorphism styling for audio UI
+======================================== */
+
+/* Compact Controls (in-game) */
+.sound-controls-compact {
+    position: fixed;
+    top: 12px;
+    /* Same height as language toggle */
+    left: 100px;
+    /* Positioned right of language toggle */
+    display: flex;
+    gap: 8px;
+    z-index: 1000;
+}
+
+.sound-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 14px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.sound-btn:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.sound-btn.muted {
+    opacity: 0.6;
+    background: rgba(255, 100, 100, 0.15);
+}
+
+.sound-btn-init {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    50% {
+        box-shadow: 0 4px 24px rgba(100, 200, 255, 0.4);
+    }
+}
+
+.sound-icon {
+    font-size: 18px;
+}
+
+.sound-label {
+    font-weight: 500;
+}
+
+/* Settings Panel */
+.sound-panel {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 280px;
+    background: rgba(30, 40, 60, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sound-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    font-weight: 600;
+    color: white;
+    font-size: 16px;
+}
+
+.sound-panel-close {
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.sound-panel-close:hover {
+    background: rgba(255, 100, 100, 0.3);
+}
+
+/* Volume Sliders */
+.sound-slider-group {
+    margin-bottom: 12px;
+}
+
+.sound-slider-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 13px;
+}
+
+.sound-slider-group label span:first-child {
+    min-width: 80px;
+}
+
+.sound-slider-group input[type="range"] {
+    flex: 1;
+    height: 6px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.sound-slider-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(135deg, #64B5F6, #42A5F5);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+}
+
+.sound-slider-group input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.volume-value {
+    min-width: 35px;
+    text-align: right;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Test Buttons */
+.sound-test-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+}
+
+.sound-test-buttons button {
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sound-test-buttons button:hover {
+    background: rgba(100, 181, 246, 0.3);
+}
+
+.sound-zone-info {
+    margin-top: 12px;
+    padding: 8px;
+    background: rgba(76, 175, 80, 0.2);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 12px;
+    text-align: center;
+}
+
+/* Full Panel Mode (Settings Page) */
+.sound-controls-full {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sound-controls-full h3 {
+    margin: 0 0 20px 0;
+    color: white;
+    font-size: 18px;
+}
+
+.sound-enable-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.sound-enable-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(76, 175, 80, 0.4);
+}
+
+.sound-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.status-indicator.active {
+    background: #4CAF50;
+    box-shadow: 0 0 10px #4CAF50;
+}
+
+.status-indicator.muted {
+    background: #f44336;
+}
+
+.sound-status button {
+    margin-left: auto;
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sound-status button:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.sound-sliders {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.slider-row label {
+    min-width: 120px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+.slider-row input[type="range"] {
+    flex: 1;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.slider-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #64B5F6, #2196F3);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.slider-row span {
+    min-width: 40px;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+}
+
+.zone-selector {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+}
+
+.zone-selector label {
+    display: block;
+    margin-bottom: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+}
+
+.zone-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.zone-buttons button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 12px;
+}
+
+.zone-buttons button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.zone-buttons button.active {
+    background: rgba(100, 181, 246, 0.3);
+    border-color: rgba(100, 181, 246, 0.5);
+    box-shadow: 0 0 16px rgba(100, 181, 246, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sound-controls-compact {
+        top: 55px;
+        left: 12px;
+    }
+
+    .sound-panel {
+        width: 260px;
+    }
+
+    .zone-buttons button {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+}

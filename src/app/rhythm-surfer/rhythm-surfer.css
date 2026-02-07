@@ -1,0 +1,876 @@
+/* ==================== RHYTHM SURFER STYLES ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+.rhythm-surfer-app {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #1A1A2E 0%, #16213E 50%, #0F3460 100%);
+    padding: 1rem;
+    padding-bottom: 3rem;
+    font-family: 'Nanum Gothic', sans-serif;
+    position: relative;
+}
+
+/* Starfield Background */
+.rhythm-surfer-app::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+        radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(2px 2px at 160px 120px, #ddd, transparent),
+        radial-gradient(1px 1px at 230px 80px, #fff, transparent),
+        radial-gradient(2px 2px at 300px 150px, #eee, transparent);
+    background-repeat: repeat;
+    background-size: 400px 200px;
+    animation: twinkle 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.rhythm-surfer-app>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+.rhythm-surfer-app .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+}
+
+.rhythm-surfer-app .back-link {
+    color: #E94560;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: transform 0.2s;
+}
+
+.rhythm-surfer-app h1 {
+    font-size: 1.2rem;
+    color: #F5F5F5;
+    margin: 0;
+}
+
+.rhythm-surfer-app .header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rhythm-surfer-app .lang-toggle {
+    padding: 0.25rem 0.5rem;
+    background: rgba(233, 69, 96, 0.15);
+    border: 1px solid rgba(233, 69, 96, 0.3);
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #E94560;
+    cursor: pointer;
+}
+
+.rhythm-surfer-app .acorn-badge {
+    background: linear-gradient(135deg, #8D6E63, #5D4037);
+    color: white;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+/* Rank Card */
+.rhythm-surfer-app .rank-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.rhythm-surfer-app .rank-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.rhythm-surfer-app .rank-emoji-large {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 2px 8px rgba(233, 69, 96, 0.5));
+}
+
+.rhythm-surfer-app .rank-label {
+    display: block;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rhythm-surfer-app .rank-name {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #E94560;
+}
+
+.rhythm-surfer-app .rank-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.rhythm-surfer-app .rs-stat {
+    text-align: center;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.rhythm-surfer-app .rs-value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #FFD700;
+}
+
+.rhythm-surfer-app .rs-label {
+    display: block;
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 0.1rem;
+}
+
+/* Tempo Filter */
+.rhythm-surfer-app .tempo-filter {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.rhythm-surfer-app .tempo-pill {
+    padding: 0.35rem 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s;
+}
+
+.rhythm-surfer-app .tempo-pill.active {
+    background: rgba(233, 69, 96, 0.3);
+    border-color: #E94560;
+    color: #E94560;
+}
+
+/* Song Selection */
+.rhythm-surfer-app .song-selection {
+    margin-bottom: 1rem;
+}
+
+.rhythm-surfer-app .song-selection h2 {
+    color: #F5F5F5;
+    text-align: center;
+    margin: 0 0 0.75rem 0;
+    font-size: 1rem;
+}
+
+.rhythm-surfer-app .song-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.rhythm-surfer-app .song-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.rhythm-surfer-app .song-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--song-color, #E94560);
+    opacity: 0.7;
+}
+
+.rhythm-surfer-app .song-card:hover {
+    background: rgba(233, 69, 96, 0.15);
+    border-color: var(--song-color, #E94560);
+    transform: translateY(-3px);
+}
+
+.rhythm-surfer-app .song-emoji {
+    font-size: 2rem;
+}
+
+.rhythm-surfer-app .song-title {
+    color: #F5F5F5;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.rhythm-surfer-app .song-meta {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+}
+
+.rhythm-surfer-app .tempo-tag {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.rhythm-surfer-app .tempo-tag.slow {
+    background: #4CAF50;
+    color: white;
+}
+
+.rhythm-surfer-app .tempo-tag.medium {
+    background: #FFC107;
+    color: #333;
+}
+
+.rhythm-surfer-app .tempo-tag.fast {
+    background: #E94560;
+    color: white;
+}
+
+.rhythm-surfer-app .bpm-tag {
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 600;
+}
+
+.rhythm-surfer-app .song-best {
+    font-size: 0.7rem;
+    color: #FFD700;
+    font-weight: 700;
+    margin-top: 0.15rem;
+}
+
+/* Game Section */
+.rhythm-surfer-app .game-section {
+    min-height: 400px;
+}
+
+.rhythm-surfer-app .game-hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+}
+
+.rhythm-surfer-app .timer {
+    color: #F5F5F5;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.rhythm-surfer-app .score-display {
+    color: #FFD700;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.rhythm-surfer-app .combo-display {
+    color: #F5F5F5;
+    font-size: 0.9rem;
+}
+
+.rhythm-surfer-app .combo-value {
+    color: #E94560;
+    font-weight: 800;
+    transition: all 0.2s;
+}
+
+.rhythm-surfer-app .combo-value.hot {
+    color: #FF6B6B;
+    text-shadow: 0 0 8px rgba(255, 107, 107, 0.5);
+}
+
+.rhythm-surfer-app .combo-value.fire {
+    color: #FFD700;
+    text-shadow: 0 0 12px rgba(255, 215, 0, 0.7);
+    font-size: 1.1em;
+}
+
+/* EQ Visualizer */
+.rhythm-surfer-app .eq-visualizer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    height: 50px;
+    margin-bottom: 0.75rem;
+    padding: 0 2rem;
+}
+
+.rhythm-surfer-app .eq-bar {
+    flex: 1;
+    max-width: 20px;
+    border-radius: 3px 3px 0 0;
+    transition: height 0.1s ease;
+    min-height: 3px;
+}
+
+/* Beat Zone */
+.rhythm-surfer-app .beat-zone {
+    width: 100%;
+    height: 260px;
+    border-radius: 20px;
+    background: radial-gradient(circle at center,
+            rgba(233, 69, 96, 0.15) 0%,
+            rgba(15, 52, 96, 0.4) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.rhythm-surfer-app .beat-zone.active {
+    background: radial-gradient(circle at center,
+            rgba(233, 69, 96, 0.25) 0%,
+            rgba(15, 52, 96, 0.5) 100%);
+}
+
+.rhythm-surfer-app .beat-pulse {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.rhythm-surfer-app .beat-pulse.pulsing {
+    animation: pulse-ring 0.5s ease-out;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.3);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+.rhythm-surfer-app .beat-target {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    opacity: 0;
+    transition: opacity 0.1s;
+}
+
+.rhythm-surfer-app .beat-target.visible {
+    opacity: 1;
+}
+
+.rhythm-surfer-app .beat-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle, #E94560, #FF6B6B 50%, transparent 70%);
+    animation: pulse-beat 0.4s ease-out;
+    box-shadow: 0 0 40px rgba(233, 69, 96, 0.8);
+}
+
+@keyframes pulse-beat {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.rhythm-surfer-app .start-prompt {
+    text-align: center;
+    color: #F5F5F5;
+}
+
+.rhythm-surfer-app .song-emoji-large {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.rhythm-surfer-app .start-prompt h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.2rem;
+}
+
+.rhythm-surfer-app .bpm-display {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.rhythm-surfer-app .start-prompt p {
+    margin: 0;
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+.rhythm-surfer-app .tap-instruction {
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Now Playing Bar */
+.rhythm-surfer-app .now-playing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.6rem;
+    margin-top: 0.75rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.rhythm-surfer-app .np-emoji {
+    font-size: 1.2rem;
+}
+
+.rhythm-surfer-app .np-title {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.rhythm-surfer-app .np-bpm {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.75rem;
+}
+
+/* Feedback */
+.rhythm-surfer-app .feedback {
+    position: absolute;
+    font-size: 1.8rem;
+    font-weight: 800;
+    animation: pop-feedback 0.3s ease-out;
+}
+
+@keyframes pop-feedback {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.rhythm-surfer-app .feedback.perfect {
+    color: #FFD700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+}
+
+.rhythm-surfer-app .feedback.good {
+    color: #4CAF50;
+    text-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+}
+
+.rhythm-surfer-app .feedback.miss {
+    color: #F44336;
+    text-shadow: 0 0 20px rgba(244, 67, 54, 0.8);
+}
+
+/* Result Section */
+.rhythm-surfer-app .result-section {
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rhythm-surfer-app .result-emoji {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.rhythm-surfer-app .result-section h2 {
+    color: #F5F5F5;
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+}
+
+.rhythm-surfer-app .result-score {
+    margin-bottom: 1.25rem;
+}
+
+.rhythm-surfer-app .score-label {
+    color: rgba(255, 255, 255, 0.5);
+    display: block;
+    font-size: 0.8rem;
+}
+
+.rhythm-surfer-app .score-number {
+    color: #FFD700;
+    font-size: 2.5rem;
+    font-weight: 800;
+    display: block;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.rhythm-surfer-app .result-breakdown {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.rhythm-surfer-app .rb-item {
+    padding: 0.75rem 0.5rem;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.rhythm-surfer-app .rb-icon {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.rhythm-surfer-app .rb-label {
+    display: block;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.rhythm-surfer-app .rb-value {
+    display: block;
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.rhythm-surfer-app .rb-item.perfect .rb-value {
+    color: #FFD700;
+}
+
+.rhythm-surfer-app .rb-item.good .rb-value {
+    color: #4CAF50;
+}
+
+.rhythm-surfer-app .rb-item.miss .rb-value {
+    color: #F44336;
+}
+
+.rhythm-surfer-app .result-extras {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.rhythm-surfer-app .re-stat {
+    text-align: center;
+}
+
+.rhythm-surfer-app .re-label {
+    display: block;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.rhythm-surfer-app .re-value {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #E94560;
+}
+
+.rhythm-surfer-app .result-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.rhythm-surfer-app .play-again-btn,
+.rhythm-surfer-app .back-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.85rem;
+}
+
+.rhythm-surfer-app .play-again-btn {
+    background: linear-gradient(135deg, #E94560, #FF6B6B);
+    color: white;
+}
+
+.rhythm-surfer-app .play-again-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(233, 69, 96, 0.5);
+}
+
+.rhythm-surfer-app .back-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #F5F5F5;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* History Section */
+.rhythm-surfer-app .history-section {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rhythm-surfer-app .history-section h2 {
+    color: #F5F5F5;
+    margin: 0 0 0.75rem 0;
+    font-size: 1rem;
+}
+
+.rhythm-surfer-app .empty-history {
+    text-align: center;
+    padding: 1rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.rhythm-surfer-app .empty-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.rhythm-surfer-app .history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.rhythm-surfer-app .history-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 0.75rem;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.rhythm-surfer-app .hi-emoji {
+    font-size: 1.2rem;
+}
+
+.rhythm-surfer-app .hi-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.rhythm-surfer-app .hi-song {
+    display: block;
+    color: #F5F5F5;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.rhythm-surfer-app .hi-date {
+    display: block;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.65rem;
+}
+
+.rhythm-surfer-app .hi-stats {
+    text-align: right;
+}
+
+.rhythm-surfer-app .hi-score {
+    display: block;
+    color: #FFD700;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.rhythm-surfer-app .hi-accuracy {
+    display: block;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.65rem;
+}
+
+/* Motivation Section */
+.rhythm-surfer-app .motivation-section {
+    text-align: center;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+}
+
+.rhythm-surfer-app .motivation-section p {
+    margin: 0;
+    color: #E94560;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* Toasts */
+.rhythm-surfer-app .reward-toast {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #E94560, #FF6B6B);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 8px 30px rgba(233, 69, 96, 0.5);
+    z-index: 2000;
+    animation: toast-appear 0.5s ease-out;
+}
+
+.rhythm-surfer-app .high-score-toast {
+    position: fixed;
+    top: 4.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #FFD700, #FFA000);
+    color: #333;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    z-index: 2000;
+    box-shadow: 0 8px 30px rgba(255, 215, 0, 0.5);
+    animation: toast-appear 0.5s ease-out;
+}
+
+@keyframes toast-appear {
+    from {
+        transform: translateX(-50%) translateY(-80px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.rhythm-surfer-app .toast-icon {
+    font-size: 1.5rem;
+}
+
+.rhythm-surfer-app .toast-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.rhythm-surfer-app .toast-reward {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .rhythm-surfer-app .song-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .rhythm-surfer-app .rank-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

@@ -1,0 +1,1081 @@
+/* ==================== DREAM CATCHER STYLES ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+.dream-catcher-app {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #0D0D1A 0%, #1A1A2E 30%, #2D2D44 100%);
+    padding: 1rem;
+    padding-bottom: 3rem;
+    font-family: 'Nanum Gothic', sans-serif;
+    position: relative;
+}
+
+/* Starry Background */
+.dream-catcher-app::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        radial-gradient(1px 1px at 10% 10%, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 20% 30%, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(2px 2px at 40% 15%, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(1px 1px at 60% 25%, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(1px 1px at 80% 40%, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(2px 2px at 90% 60%, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 15% 70%, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 50% 80%, rgba(255, 255, 255, 0.7), transparent);
+    animation: twinkle 5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.dream-catcher-app>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* Header */
+.dream-catcher-app .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+}
+
+.dream-catcher-app .back-link {
+    color: #B19CD9;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.2s;
+}
+
+.dream-catcher-app .back-link:hover {
+    transform: translateX(-4px);
+}
+
+.dream-catcher-app h1 {
+    font-size: 1.4rem;
+    color: #F5F5F5;
+    margin: 0;
+}
+
+.dream-catcher-app .acorn-badge {
+    background: linear-gradient(135deg, #8D6E63, #5D4037);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+/* Language Toggle */
+.dream-catcher-app .language-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.dream-catcher-app .lang-btn {
+    padding: 0.5rem 1.5rem;
+    border: 2px solid #B19CD9;
+    background: transparent;
+    color: #B19CD9;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.dream-catcher-app .lang-btn.active {
+    background: #B19CD9;
+    color: #1A1A2E;
+}
+
+/* Dream Catcher Visual */
+.dream-catcher-app .catcher-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.dream-catcher-app .dream-catcher-visual {
+    width: 180px;
+    height: 220px;
+    margin: 0 auto 1rem;
+    position: relative;
+}
+
+.dream-catcher-app .catcher-ring {
+    width: 150px;
+    height: 150px;
+    border: 4px solid #B19CD9;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 20px rgba(177, 156, 217, 0.5);
+}
+
+.dream-catcher-app .catcher-web {
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background:
+        radial-gradient(circle, transparent 20%, rgba(177, 156, 217, 0.1) 21%, rgba(177, 156, 217, 0.1) 22%, transparent 23%),
+        radial-gradient(circle, transparent 40%, rgba(177, 156, 217, 0.1) 41%, rgba(177, 156, 217, 0.1) 42%, transparent 43%),
+        radial-gradient(circle, transparent 60%, rgba(177, 156, 217, 0.1) 61%, rgba(177, 156, 217, 0.1) 62%, transparent 63%);
+    border-radius: 50%;
+}
+
+.dream-catcher-app .catcher-center {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dream-catcher-app .moon-emoji {
+    font-size: 2.5rem;
+    animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    50% {
+        text-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
+    }
+}
+
+.dream-catcher-app .feathers {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+}
+
+.dream-catcher-app .feather {
+    font-size: 1.5rem;
+    animation: sway 2s ease-in-out infinite;
+}
+
+.dream-catcher-app .feather:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dream-catcher-app .feather:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.dream-catcher-app .feather:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes sway {
+
+    0%,
+    100% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+}
+
+.dream-catcher-app .catcher-label {
+    color: #B19CD9;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.dream-catcher-app .catch-btn {
+    padding: 1rem 2rem;
+    border: none;
+    background: linear-gradient(135deg, #B19CD9, #9B7FCB);
+    color: white;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(177, 156, 217, 0.5);
+}
+
+.dream-catcher-app .catch-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(177, 156, 217, 0.6);
+}
+
+/* Stats Section */
+.dream-catcher-app .stats-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.dream-catcher-app .stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dream-catcher-app .stat-icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.dream-catcher-app .stat-emoji {
+    font-size: 2rem;
+    display: block;
+}
+
+.dream-catcher-app .stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #B19CD9;
+    display: block;
+}
+
+.dream-catcher-app .stat-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Journal Section */
+.dream-catcher-app .journal-section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dream-catcher-app .journal-section h2 {
+    color: #F5F5F5;
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+}
+
+.dream-catcher-app .empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.dream-catcher-app .empty-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.dream-catcher-app .dream-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.dream-catcher-app .dream-card {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    padding: 1rem;
+    border-left: 4px solid;
+}
+
+.dream-catcher-app .dream-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.dream-catcher-app .mood-emoji {
+    font-size: 1.5rem;
+}
+
+.dream-catcher-app .dream-meta {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dream-catcher-app .dream-date {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+}
+
+.dream-catcher-app .recurring-tag {
+    font-size: 0.875rem;
+}
+
+.dream-catcher-app .dream-card .delete-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(239, 83, 80, 0.3);
+    color: #EF5350;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.dream-catcher-app .dream-card:hover .delete-btn {
+    opacity: 1;
+}
+
+.dream-catcher-app .delete-btn:hover {
+    background: #EF5350;
+    color: white;
+}
+
+.dream-catcher-app .dream-content {
+    color: #F5F5F5;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.5;
+}
+
+.dream-catcher-app .dream-symbols {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.dream-catcher-app .symbol-tag {
+    font-size: 1.25rem;
+    padding: 0.25rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.dream-catcher-app .interpret-btn {
+    background: transparent;
+    border: 1px solid rgba(177, 156, 217, 0.5);
+    color: #B19CD9;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+}
+
+.dream-catcher-app .interpret-btn:hover {
+    background: rgba(177, 156, 217, 0.2);
+}
+
+.dream-catcher-app .interpretation-box {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(177, 156, 217, 0.1);
+    border-radius: 12px;
+    animation: fade-in 0.3s ease;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dream-catcher-app .interpretation-box h4 {
+    color: #B19CD9;
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.dream-catcher-app .interpretation-box p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Motivation Section */
+.dream-catcher-app .motivation-section {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.dream-catcher-app .motivation-section p {
+    margin: 0;
+    color: #B19CD9;
+    font-weight: 600;
+}
+
+/* Modal */
+.dream-catcher-app .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+    animation: fade-in 0.3s;
+}
+
+.dream-catcher-app .modal-content {
+    background: linear-gradient(180deg, #1A1A2E, #2D2D44);
+    border-radius: 24px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dream-catcher-app .modal-content h2 {
+    margin: 0 0 1.5rem 0;
+    color: #F5F5F5;
+    text-align: center;
+}
+
+.dream-catcher-app .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.dream-catcher-app .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #B19CD9;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.dream-catcher-app .form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid rgba(177, 156, 217, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    font-size: 1rem;
+    color: white;
+    resize: none;
+    transition: border-color 0.3s;
+    font-family: inherit;
+}
+
+.dream-catcher-app .form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.dream-catcher-app .form-group textarea:focus {
+    outline: none;
+    border-color: #B19CD9;
+}
+
+.dream-catcher-app .mood-picker {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.dream-catcher-app .mood-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.75rem 0.5rem;
+    border: 2px solid transparent;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dream-catcher-app .mood-btn span:first-child {
+    font-size: 1.5rem;
+}
+
+.dream-catcher-app .mood-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.dream-catcher-app .symbol-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.dream-catcher-app .symbol-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dream-catcher-app .symbol-btn.active {
+    background: rgba(177, 156, 217, 0.3);
+    border-color: #B19CD9;
+}
+
+.dream-catcher-app .recurring-toggle {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.dream-catcher-app .toggle-btn {
+    flex: 1;
+    padding: 0.75rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dream-catcher-app .toggle-btn.active {
+    background: #B19CD9;
+    color: #1A1A2E;
+    border-color: #B19CD9;
+}
+
+.dream-catcher-app .modal-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.dream-catcher-app .cancel-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: #F5F5F5;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dream-catcher-app .cancel-btn:hover {
+    background: rgba(239, 83, 80, 0.3);
+    border-color: #EF5350;
+}
+
+.dream-catcher-app .save-btn {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    background: linear-gradient(135deg, #B19CD9, #9B7FCB);
+    color: white;
+    border-radius: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.dream-catcher-app .save-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Reward Toast */
+.dream-catcher-app .reward-toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #B19CD9, #9B7FCB);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 8px 30px rgba(177, 156, 217, 0.5);
+    z-index: 2000;
+    animation: toast-appear 0.5s ease-out;
+}
+
+@keyframes toast-appear {
+    from {
+        transform: translateX(-50%) translateY(-100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.dream-catcher-app .toast-icon {
+    font-size: 2rem;
+}
+
+.dream-catcher-app .toast-title {
+    font-weight: 700;
+}
+
+.dream-catcher-app .toast-reward {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* ==================== ENHANCED HEADER ==================== */
+.dream-catcher-app .header-right {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.dream-catcher-app .icon-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(177, 156, 217, 0.15);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dream-catcher-app .icon-btn:hover {
+    background: rgba(177, 156, 217, 0.3);
+    transform: scale(1.1);
+}
+
+/* ==================== ENHANCED STATS ==================== */
+.dream-catcher-app .stats-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ==================== FILTER SECTION ==================== */
+.dream-catcher-app .filter-section {
+    margin-bottom: 1.5rem;
+}
+
+.dream-catcher-app .search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid rgba(177, 156, 217, 0.2);
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    font-size: 0.9rem;
+    color: white;
+    margin-bottom: 0.75rem;
+    font-family: inherit;
+}
+
+.dream-catcher-app .search-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.dream-catcher-app .search-input:focus {
+    outline: none;
+    border-color: #B19CD9;
+}
+
+.dream-catcher-app .filter-chips {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.dream-catcher-app .filter-chip {
+    padding: 0.5rem 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.dream-catcher-app .filter-chip:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.dream-catcher-app .filter-chip.active {
+    background: rgba(177, 156, 217, 0.2);
+    border-color: #B19CD9;
+    color: #B19CD9;
+}
+
+/* ==================== DREAM CARD ENHANCED ==================== */
+.dream-catcher-app .dream-tags {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.dream-catcher-app .tag {
+    font-size: 0.75rem;
+}
+
+.dream-catcher-app .dream-actions {
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+.dream-catcher-app .dream-card:hover .dream-actions {
+    opacity: 1;
+}
+
+.dream-catcher-app .view-btn {
+    padding: 0.25rem 0.75rem;
+    background: rgba(177, 156, 217, 0.2);
+    border: none;
+    border-radius: 8px;
+    color: #B19CD9;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.dream-catcher-app .view-btn:hover {
+    background: rgba(177, 156, 217, 0.4);
+}
+
+/* Symbol clickable */
+.dream-catcher-app .symbol-tag {
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s;
+}
+
+.dream-catcher-app .symbol-tag:hover {
+    transform: scale(1.2);
+}
+
+/* ==================== CLOSE BUTTON ==================== */
+.dream-catcher-app .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.dream-catcher-app .close-btn:hover {
+    background: rgba(239, 83, 80, 0.3);
+}
+
+.dream-catcher-app .modal-content {
+    position: relative;
+}
+
+/* ==================== CLARITY PICKER ==================== */
+.dream-catcher-app .clarity-picker {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.dream-catcher-app .clarity-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    opacity: 0.3;
+}
+
+.dream-catcher-app .clarity-btn.active {
+    opacity: 1;
+    background: rgba(177, 156, 217, 0.2);
+}
+
+/* ==================== TOGGLES ROW ==================== */
+.dream-catcher-app .toggles-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.dream-catcher-app .toggle-group {
+    flex: 1;
+}
+
+.dream-catcher-app .toggle-group label {
+    margin-bottom: 0.5rem;
+}
+
+/* ==================== STATS MODAL ==================== */
+.dream-catcher-app .stats-overview {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.dream-catcher-app .overview-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.dream-catcher-app .overview-card .ov-icon {
+    font-size: 1.5rem;
+}
+
+.dream-catcher-app .overview-card .ov-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #B19CD9;
+}
+
+.dream-catcher-app .overview-card .ov-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ==================== MOOD BREAKDOWN ==================== */
+.dream-catcher-app .mood-breakdown {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 16px;
+}
+
+.dream-catcher-app .mood-breakdown h3 {
+    font-size: 0.9rem;
+    color: #B19CD9;
+    margin: 0 0 1rem 0;
+}
+
+.dream-catcher-app .breakdown-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.dream-catcher-app .breakdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.dream-catcher-app .breakdown-emoji {
+    font-size: 1.25rem;
+    width: 30px;
+}
+
+.dream-catcher-app .breakdown-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.dream-catcher-app .breakdown-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.dream-catcher-app .breakdown-count {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    min-width: 24px;
+    text-align: right;
+}
+
+/* ==================== SYMBOL MODAL ==================== */
+.dream-catcher-app .symbol-modal {
+    text-align: center;
+    max-width: 320px;
+}
+
+.dream-catcher-app .symbol-detail-emoji {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+}
+
+.dream-catcher-app .symbol-meaning {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+}
+
+/* ==================== DETAIL MODAL ==================== */
+.dream-catcher-app .detail-modal {
+    text-align: center;
+}
+
+.dream-catcher-app .detail-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.dream-catcher-app .detail-emoji {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+}
+
+.dream-catcher-app .detail-mood {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.dream-catcher-app .detail-tags {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.dream-catcher-app .detail-tag {
+    padding: 0.25rem 0.75rem;
+    background: rgba(177, 156, 217, 0.2);
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: #B19CD9;
+}
+
+.dream-catcher-app .detail-content {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    border-radius: 16px;
+    color: #F5F5F5;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.dream-catcher-app .detail-symbols {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.dream-catcher-app .detail-symbols .symbol-tag.clickable {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    background: rgba(177, 156, 217, 0.2);
+    border-radius: 12px;
+}
+
+.dream-catcher-app .detail-date {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+}
+
+/* ==================== MOBILE RESPONSIVE ==================== */
+@media (max-width: 480px) {
+    .dream-catcher-app .stats-section {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .dream-catcher-app .stat-card {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .dream-catcher-app .stat-icon {
+        font-size: 1.25rem;
+    }
+
+    .dream-catcher-app .stat-value {
+        font-size: 1.5rem;
+    }
+
+    .dream-catcher-app .filter-chips {
+        justify-content: center;
+    }
+
+    .dream-catcher-app .toggles-row {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .dream-catcher-app .dream-actions {
+        opacity: 1;
+    }
+
+    .dream-catcher-app .clarity-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}

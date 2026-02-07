@@ -1,0 +1,672 @@
+/* ==================== DAILY QUEST STYLES ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+.daily-quest-app {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #FFF3E0 0%, #FFE0B2 50%, #FFCC80 100%);
+    font-family: 'Nanum Gothic', sans-serif;
+    padding: 1rem;
+    padding-bottom: 2rem;
+}
+
+/* Header */
+.daily-quest-app .app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    margin-bottom: 1rem;
+}
+
+.daily-quest-app .app-header h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #E65100;
+}
+
+.daily-quest-app .back-link {
+    color: #FF6F00;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.daily-quest-app .header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.daily-quest-app .lang-toggle {
+    padding: 0.25rem 0.5rem;
+    background: rgba(255, 111, 0, 0.1);
+    border: 1px solid rgba(255, 111, 0, 0.3);
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #E65100;
+    cursor: pointer;
+}
+
+.daily-quest-app .acorn-badge {
+    background: linear-gradient(135deg, #8D6E63, #5D4037);
+    color: white;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+/* Rank Card */
+.daily-quest-app .rank-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(135deg, rgba(255, 111, 0, 0.15), rgba(230, 81, 0, 0.1));
+    border-radius: 16px;
+    margin-bottom: 0.75rem;
+    border: 1px solid rgba(255, 111, 0, 0.2);
+}
+
+.daily-quest-app .rank-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.daily-quest-app .rank-emoji {
+    font-size: 1.5rem;
+}
+
+.daily-quest-app .rank-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.daily-quest-app .rank-name {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: #E65100;
+}
+
+.daily-quest-app .rank-level {
+    font-size: 0.65rem;
+    color: #999;
+}
+
+.daily-quest-app .rank-right {
+    flex: 1;
+    max-width: 120px;
+    margin-left: 1rem;
+}
+
+.daily-quest-app .xp-bar-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.daily-quest-app .xp-bar {
+    height: 6px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.daily-quest-app .xp-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FFD54F, #FF9800);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+.daily-quest-app .xp-text {
+    font-size: 0.55rem;
+    color: #999;
+    text-align: right;
+}
+
+/* Stats Overview */
+.daily-quest-app .stats-overview {
+    margin-bottom: 0.75rem;
+}
+
+.daily-quest-app .so-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+.daily-quest-app .so-stat {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    padding: 0.6rem 0.4rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.daily-quest-app .so-icon {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.1rem;
+}
+
+.daily-quest-app .so-value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #E65100;
+}
+
+.daily-quest-app .so-label {
+    display: block;
+    font-size: 0.5rem;
+    color: #999;
+    text-transform: uppercase;
+}
+
+/* Week Chart */
+.daily-quest-app .week-chart {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.daily-quest-app .week-chart h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.85rem;
+    color: #E65100;
+}
+
+.daily-quest-app .week-bars {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.4rem;
+    align-items: end;
+    height: 70px;
+}
+
+.daily-quest-app .week-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.daily-quest-app .week-day.today .wd-label {
+    color: #E65100;
+    font-weight: 800;
+}
+
+.daily-quest-app .wd-bar-container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.daily-quest-app .wd-bar {
+    width: 70%;
+    background: linear-gradient(180deg, #FF9800, #FFB74D);
+    border-radius: 3px 3px 0 0;
+    transition: height 0.3s ease;
+    min-width: 8px;
+}
+
+.daily-quest-app .wd-count {
+    font-size: 0.55rem;
+    color: #666;
+    font-weight: 700;
+    height: 12px;
+}
+
+.daily-quest-app .wd-label {
+    font-size: 0.55rem;
+    color: #999;
+}
+
+/* Category Breakdown */
+.daily-quest-app .category-breakdown {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.daily-quest-app .category-breakdown h3 {
+    margin: 0 0 0.4rem 0;
+    font-size: 0.85rem;
+    color: #E65100;
+}
+
+.daily-quest-app .cb-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.daily-quest-app .cb-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.daily-quest-app .cb-emoji {
+    font-size: 0.9rem;
+    width: 20px;
+    text-align: center;
+}
+
+.daily-quest-app .cb-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.daily-quest-app .cb-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.daily-quest-app .cb-count {
+    font-size: 0.65rem;
+    color: #999;
+    font-weight: 700;
+    width: 25px;
+    text-align: right;
+}
+
+/* Dice Section */
+.daily-quest-app .dice-section {
+    text-align: center;
+    margin-bottom: 0.75rem;
+}
+
+.daily-quest-app .dice-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background: linear-gradient(135deg, #FF6F00, #FF9800);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+}
+
+.daily-quest-app .dice-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.4);
+}
+
+.daily-quest-app .dice-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.daily-quest-app .dice-btn.rolling .dice-emoji {
+    animation: dice-spin 0.2s ease-in-out infinite;
+}
+
+@keyframes dice-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.daily-quest-app .dice-emoji {
+    font-size: 1.3rem;
+}
+
+.daily-quest-app .reroll-info {
+    margin: 0.3rem 0 0 0;
+    font-size: 0.7rem;
+    color: #999;
+}
+
+/* Quest Board */
+.daily-quest-app .quest-board {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.daily-quest-app .board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.daily-quest-app .board-header h2 {
+    margin: 0;
+    font-size: 1rem;
+    color: #E65100;
+}
+
+.daily-quest-app .clear-btn {
+    padding: 0.3rem 0.5rem;
+    background: transparent;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* Quest Filter */
+.daily-quest-app .quest-filter {
+    display: flex;
+    gap: 0.3rem;
+    overflow-x: auto;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.3rem;
+    -webkit-overflow-scrolling: touch;
+}
+
+.daily-quest-app .quest-filter::-webkit-scrollbar {
+    display: none;
+}
+
+.daily-quest-app .qf-pill {
+    padding: 0.25rem 0.6rem;
+    border: 1px solid #E0E0E0;
+    background: white;
+    border-radius: 10px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s;
+    color: #666;
+}
+
+.daily-quest-app .qf-pill.active {
+    background: #FFF3E0;
+    border-color: #FF9800;
+    color: #E65100;
+}
+
+/* Empty Board */
+.daily-quest-app .empty-board {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.daily-quest-app .empty-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
+}
+
+.daily-quest-app .empty-board p {
+    color: #999;
+    font-size: 0.85rem;
+}
+
+/* Quest Card */
+.daily-quest-app .quest-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.daily-quest-app .quest-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+    border-radius: 12px;
+    border: 1px solid #FFE082;
+    border-left: 4px solid #FF9800;
+    transition: all 0.3s;
+}
+
+.daily-quest-app .quest-card.completed {
+    opacity: 0.5;
+    background: #F5F5F5;
+    border-color: #E0E0E0;
+}
+
+.daily-quest-app .quest-emoji {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.daily-quest-app .quest-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.daily-quest-app .quest-info h3 {
+    margin: 0 0 0.3rem 0;
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.daily-quest-app .quest-meta {
+    display: flex;
+    gap: 0.3rem;
+    margin-bottom: 0.3rem;
+    flex-wrap: wrap;
+}
+
+.daily-quest-app .category-tag,
+.daily-quest-app .difficulty-tag {
+    font-size: 0.55rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+}
+
+.daily-quest-app .quest-rewards {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.daily-quest-app .reward {
+    font-size: 0.7rem;
+    color: #888;
+    font-weight: 600;
+}
+
+/* Claim Button */
+.daily-quest-app .claim-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid #FF9800;
+    background: white;
+    color: #FF9800;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.daily-quest-app .claim-btn:hover:not(:disabled) {
+    background: #FF9800;
+    color: white;
+    transform: scale(1.1);
+}
+
+.daily-quest-app .claim-btn.claimed {
+    background: #4CAF50;
+    border-color: #4CAF50;
+    color: white;
+    cursor: default;
+}
+
+/* Motivation */
+.daily-quest-app .motivation {
+    text-align: center;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+}
+
+.daily-quest-app .motivation p {
+    margin: 0;
+    color: #E65100;
+    font-weight: 600;
+    font-size: 0.85rem;
+    animation: tip-fade 0.5s ease;
+}
+
+@keyframes tip-fade {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Reward & Level Up Popups */
+.daily-quest-app .reward-popup,
+.daily-quest-app .level-up-popup {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    animation: fade-in 0.3s;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.daily-quest-app .reward-content,
+.daily-quest-app .level-up-content {
+    background: white;
+    border-radius: 24px;
+    padding: 2rem;
+    text-align: center;
+    animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 300px;
+}
+
+@keyframes pop-in {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.daily-quest-app .reward-icon,
+.daily-quest-app .level-up-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.daily-quest-app .reward-content h2,
+.daily-quest-app .level-up-content h2 {
+    margin: 0 0 0.75rem 0;
+    color: #E65100;
+    font-size: 1.2rem;
+}
+
+.daily-quest-app .reward-details {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.daily-quest-app .reward-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.daily-quest-app .new-level {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #E65100;
+    background: linear-gradient(135deg, #FFE082, #FFD54F);
+    padding: 0.75rem 1.5rem;
+    border-radius: 14px;
+}
+
+/* Bonus Toast */
+.daily-quest-app .bonus-toast {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #4CAF50, #388E3C);
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    z-index: 2000;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    animation: toast-appear 0.5s ease-out;
+}
+
+@keyframes toast-appear {
+    from {
+        transform: translateX(-50%) translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .daily-quest-app .so-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}

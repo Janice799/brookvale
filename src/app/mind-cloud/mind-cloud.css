@@ -1,0 +1,1022 @@
+/* Mind Cloud - Cloud Haven Zone */
+/* Peaceful meditation with soft gradients */
+
+.mind-cloud-app {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background: linear-gradient(180deg,
+            #E0F0FA 0%,
+            #D0E8F5 30%,
+            #C0E0F0 60%,
+            #B0D8EB 100%);
+    padding: 1rem;
+    padding-bottom: 3rem;
+    font-family: 'Nunito', system-ui, sans-serif;
+    position: relative;
+}
+
+/* Soft cloud patterns */
+.mind-cloud-app::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(ellipse 400px 200px at 20% 10%, rgba(255, 255, 255, 0.7) 0%, transparent 70%),
+        radial-gradient(ellipse 350px 180px at 75% 25%, rgba(255, 255, 255, 0.5) 0%, transparent 70%),
+        radial-gradient(ellipse 300px 150px at 40% 80%, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+    pointer-events: none;
+    animation: driftClouds 40s ease-in-out infinite;
+}
+
+@keyframes driftClouds {
+
+    0%,
+    100% {
+        transform: translateX(0) translateY(0);
+    }
+
+    25% {
+        transform: translateX(10px) translateY(-5px);
+    }
+
+    50% {
+        transform: translateX(20px) translateY(0);
+    }
+
+    75% {
+        transform: translateX(10px) translateY(5px);
+    }
+}
+
+/* Header */
+.mind-cloud-app .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(168, 200, 221, 0.2);
+    position: relative;
+    z-index: 10;
+}
+
+.mind-cloud-app .app-header h1 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #5B8BA5;
+    margin: 0;
+}
+
+.mind-cloud-app .back-link {
+    color: #7AA3B8;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.mind-cloud-app .back-link:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateX(-3px);
+}
+
+.mind-cloud-app .acorn-badge {
+    background: linear-gradient(135deg, #8B5A2B, #A67548);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* Meditation Section */
+.meditation-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 40vh;
+    position: relative;
+    z-index: 5;
+    padding: 2rem;
+}
+
+/* The Cloud */
+.meditation-cloud {
+    width: 180px;
+    height: 120px;
+    background: radial-gradient(ellipse at center,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(240, 248, 255, 0.8) 50%,
+            rgba(220, 240, 255, 0.6) 100%);
+    border-radius: 60px;
+    position: relative;
+    box-shadow:
+        0 10px 40px rgba(100, 150, 180, 0.2),
+        inset 0 0 30px rgba(255, 255, 255, 0.8);
+    animation: floatCloud 4s ease-in-out infinite;
+}
+
+@keyframes floatCloud {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.meditation-cloud::before,
+.meditation-cloud::after {
+    content: '';
+    position: absolute;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.meditation-cloud::before {
+    width: 80px;
+    height: 80px;
+    top: -30px;
+    left: 20px;
+}
+
+.meditation-cloud::after {
+    width: 100px;
+    height: 100px;
+    top: -40px;
+    right: 20px;
+}
+
+/* Meditation Text Display */
+.meditation-text {
+    margin-top: 2.5rem;
+    text-align: center;
+    max-width: 400px;
+}
+
+.meditation-text .main-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #4A7A95;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+    transition: all 0.5s ease;
+}
+
+.meditation-text .sub-text {
+    font-size: 1rem;
+    color: #7AA3B8;
+    font-style: italic;
+}
+
+/* Timer Display */
+.meditation-timer {
+    margin-top: 1.5rem;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #5B8BA5;
+}
+
+/* Progress Bar */
+.meditation-progress {
+    width: 100%;
+    max-width: 300px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    margin-top: 1rem;
+    overflow: hidden;
+}
+
+.meditation-progress .fill {
+    height: 100%;
+    background: linear-gradient(90deg, #7EC8E3, #5AA9C9);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+/* Controls */
+.meditation-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.control-btn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.start-btn {
+    background: linear-gradient(135deg, #7EC8E3, #5AA9C9);
+    color: white;
+    box-shadow: 0 4px 15px rgba(126, 200, 227, 0.4);
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(126, 200, 227, 0.5);
+}
+
+.stop-btn {
+    background: rgba(255, 255, 255, 0.8);
+    color: #7BA3B8;
+    border: 2px solid #C5DCE8;
+}
+
+/* Session Selection */
+.sessions-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(15px);
+    border-radius: 24px;
+    position: relative;
+    z-index: 5;
+}
+
+.sessions-section h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #5B8BA5;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.session-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.75rem;
+}
+
+.session-card {
+    padding: 1.2rem 1rem;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.session-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(126, 200, 227, 0.3);
+}
+
+.session-card.active {
+    border-color: #7EC8E3;
+    background: white;
+}
+
+.session-card .session-emoji {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.session-card .session-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #5B8BA5;
+    margin-bottom: 0.25rem;
+}
+
+.session-card .session-duration {
+    font-size: 0.7rem;
+    color: #7AA3B8;
+}
+
+/* Stats */
+.stats-section {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    position: relative;
+    z-index: 5;
+}
+
+.stat-card {
+    flex: 1;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    text-align: center;
+}
+
+.stat-card .stat-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #5B8BA5;
+}
+
+.stat-card .stat-label {
+    font-size: 0.75rem;
+    color: #7AA3B8;
+    margin-top: 0.25rem;
+}
+
+/* Toast */
+.session-toast {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #7EC8E3, #5AA9C9);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(126, 200, 227, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 1000;
+    animation: toastSlide 0.5s ease;
+}
+
+@keyframes toastSlide {
+    from {
+        transform: translateX(-50%) translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Motivation */
+.motivation-section {
+    margin-top: 1.5rem;
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    z-index: 5;
+}
+
+.motivation-section p {
+    font-size: 0.9rem;
+    color: #7AA3B8;
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .meditation-cloud {
+        width: 140px;
+        height: 100px;
+    }
+
+    .meditation-text .main-text {
+        font-size: 1.4rem;
+    }
+
+    .session-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ==================== ENHANCED HEADER ==================== */
+.mind-cloud-app .header-right {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.mind-cloud-app .icon-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(126, 200, 227, 0.2);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mind-cloud-app .icon-btn:hover {
+    background: rgba(126, 200, 227, 0.4);
+    transform: scale(1.1);
+}
+
+/* ==================== FILTER SECTION ==================== */
+.mind-cloud-app .filter-section {
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 5;
+}
+
+.mind-cloud-app .filter-chips {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.mind-cloud-app .filter-chip {
+    padding: 0.5rem 1rem;
+    border: 2px solid rgba(91, 139, 165, 0.2);
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    color: #5B8BA5;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.mind-cloud-app .filter-chip:hover {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.mind-cloud-app .filter-chip.active {
+    background: rgba(126, 200, 227, 0.3);
+    border-color: #7EC8E3;
+}
+
+/* ==================== SESSION CARD ENHANCED ==================== */
+.mind-cloud-app .session-card {
+    position: relative;
+}
+
+.mind-cloud-app .session-info-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 24px;
+    height: 24px;
+    border: none;
+    background: transparent;
+    font-size: 0.9rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.mind-cloud-app .session-card:hover .session-info-btn {
+    opacity: 0.7;
+}
+
+.mind-cloud-app .session-info-btn:hover {
+    opacity: 1 !important;
+}
+
+/* ==================== STAT HIGHLIGHT ==================== */
+.mind-cloud-app .stat-card.highlight {
+    background: rgba(126, 200, 227, 0.3);
+    border: 2px solid rgba(126, 200, 227, 0.5);
+}
+
+/* ==================== MODAL ==================== */
+.mind-cloud-app .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(200, 220, 230, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.mind-cloud-app .modal-content {
+    background: linear-gradient(180deg, #F0F8FF, #E0F0FA);
+    border-radius: 24px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(100, 150, 180, 0.3);
+}
+
+.mind-cloud-app .modal-content h2 {
+    margin: 0 0 1.5rem 0;
+    color: #5B8BA5;
+    text-align: center;
+}
+
+/* ==================== CLOSE BUTTON ==================== */
+.mind-cloud-app .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(126, 200, 227, 0.2);
+    color: #5B8BA5;
+    font-size: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.mind-cloud-app .close-btn:hover {
+    background: rgba(239, 83, 80, 0.2);
+    color: #EF5350;
+}
+
+/* ==================== STATS OVERVIEW ==================== */
+.mind-cloud-app .stats-overview {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.mind-cloud-app .overview-card {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1rem;
+    border-radius: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.mind-cloud-app .overview-card.highlight {
+    background: rgba(126, 200, 227, 0.3);
+    border: 2px solid rgba(126, 200, 227, 0.5);
+}
+
+.mind-cloud-app .overview-card .ov-icon {
+    font-size: 1.5rem;
+}
+
+.mind-cloud-app .overview-card .ov-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #5B8BA5;
+}
+
+.mind-cloud-app .overview-card .ov-label {
+    font-size: 0.7rem;
+    color: #7AA3B8;
+}
+
+/* ==================== FAVORITE SESSION ==================== */
+.mind-cloud-app .favorite-session {
+    margin-bottom: 1.5rem;
+}
+
+.mind-cloud-app .favorite-session h3 {
+    font-size: 0.9rem;
+    color: #5B8BA5;
+    margin: 0 0 0.75rem 0;
+}
+
+.mind-cloud-app .favorite-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1rem;
+    border-radius: 16px;
+}
+
+.mind-cloud-app .fav-emoji {
+    font-size: 2rem;
+}
+
+.mind-cloud-app .fav-name {
+    flex: 1;
+    font-weight: 700;
+    color: #5B8BA5;
+}
+
+.mind-cloud-app .fav-count {
+    background: rgba(126, 200, 227, 0.3);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: #5B8BA5;
+}
+
+/* ==================== HISTORY ==================== */
+.mind-cloud-app .history-section h3 {
+    font-size: 0.9rem;
+    color: #5B8BA5;
+    margin: 0 0 0.75rem 0;
+}
+
+.mind-cloud-app .empty-text {
+    text-align: center;
+    color: #7AA3B8;
+    font-size: 0.9rem;
+}
+
+.mind-cloud-app .history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mind-cloud-app .history-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+}
+
+.mind-cloud-app .hist-emoji {
+    font-size: 1.25rem;
+}
+
+.mind-cloud-app .hist-name {
+    flex: 1;
+    font-size: 0.9rem;
+    color: #5B8BA5;
+}
+
+.mind-cloud-app .hist-date {
+    font-size: 0.75rem;
+    color: #7AA3B8;
+}
+
+/* ==================== DETAIL MODAL ==================== */
+.mind-cloud-app .detail-modal {
+    text-align: center;
+}
+
+.mind-cloud-app .detail-emoji {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+}
+
+.mind-cloud-app .detail-category {
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.mind-cloud-app .detail-duration {
+    color: #7AA3B8;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.mind-cloud-app .detail-description {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1rem;
+    border-radius: 16px;
+    color: #5B8BA5;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.mind-cloud-app .select-session-btn {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    background: linear-gradient(135deg, #7EC8E3, #5AA9C9);
+    color: white;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.mind-cloud-app .select-session-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(126, 200, 227, 0.4);
+}
+
+/* ==================== MOBILE RESPONSIVE ==================== */
+@media (max-width: 480px) {
+    .mind-cloud-app .filter-chips {
+        font-size: 0.75rem;
+    }
+
+    .mind-cloud-app .filter-chip {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .mind-cloud-app .session-info-btn {
+        opacity: 0.5;
+    }
+
+    .mind-cloud-app .ambient-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ==================== LANG TOGGLE ==================== */
+.mind-cloud-app .lang-toggle {
+    padding: 0.3rem 0.6rem;
+    background: rgba(126, 200, 227, 0.2);
+    border: 1px solid rgba(126, 200, 227, 0.3);
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #5B8BA5;
+    cursor: pointer;
+}
+
+/* ==================== RANK CARD ==================== */
+.mind-cloud-app .rank-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 5;
+}
+
+.mind-cloud-app .rank-emoji {
+    font-size: 2rem;
+}
+
+.mind-cloud-app .rank-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.mind-cloud-app .rank-name {
+    font-weight: 800;
+    color: #5B8BA5;
+    font-size: 0.95rem;
+}
+
+.mind-cloud-app .rank-minutes {
+    font-size: 0.7rem;
+    color: #7AA3B8;
+}
+
+/* ==================== WEEKLY CHART ==================== */
+.mind-cloud-app .week-chart {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    position: relative;
+    z-index: 5;
+}
+
+.mind-cloud-app .week-chart h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.85rem;
+    color: #5B8BA5;
+}
+
+.mind-cloud-app .week-bars {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.3rem;
+    align-items: end;
+    height: 80px;
+}
+
+.mind-cloud-app .week-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.mind-cloud-app .week-day.today .wd-label {
+    color: #5B8BA5;
+    font-weight: 800;
+}
+
+.mind-cloud-app .wd-bar-container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.mind-cloud-app .wd-bar {
+    width: 65%;
+    background: linear-gradient(180deg, #7EC8E3, #5AA9C9);
+    border-radius: 4px 4px 0 0;
+    min-height: 3px;
+    transition: height 0.3s ease;
+}
+
+.mind-cloud-app .wd-count {
+    font-size: 0.5rem;
+    color: #7AA3B8;
+    height: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.mind-cloud-app .wd-label {
+    font-size: 0.55rem;
+    color: #7AA3B8;
+}
+
+/* ==================== CATEGORY BREAKDOWN ==================== */
+.mind-cloud-app .category-breakdown {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    position: relative;
+    z-index: 5;
+}
+
+.mind-cloud-app .category-breakdown h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.85rem;
+    color: #5B8BA5;
+}
+
+.mind-cloud-app .cb-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.mind-cloud-app .cb-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mind-cloud-app .cb-emoji {
+    font-size: 1rem;
+    width: 20px;
+}
+
+.mind-cloud-app .cb-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(91, 139, 165, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.mind-cloud-app .cb-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.mind-cloud-app .cb-count {
+    font-size: 0.65rem;
+    color: #7AA3B8;
+    min-width: 25px;
+    text-align: right;
+}
+
+/* ==================== AMBIENT SECTION ==================== */
+.mind-cloud-app .ambient-section {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    position: relative;
+    z-index: 5;
+}
+
+.mind-cloud-app .ambient-section h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.85rem;
+    color: #5B8BA5;
+}
+
+.mind-cloud-app .ambient-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
+}
+
+.mind-cloud-app .ambient-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    padding: 0.5rem 0.3rem;
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: #7AA3B8;
+}
+
+.mind-cloud-app .ambient-btn.active {
+    background: rgba(126, 200, 227, 0.3);
+    border-color: rgba(126, 200, 227, 0.5);
+    color: #5B8BA5;
+}
+
+.mind-cloud-app .ambient-emoji {
+    font-size: 1.3rem;
+}
+
+.mind-cloud-app .ambient-name {
+    font-size: 0.55rem;
+    font-weight: 600;
+}
+
+/* ==================== MINDFUL TIP ==================== */
+.mind-cloud-app .mindful-tip {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(126, 200, 227, 0.15);
+    border-radius: 14px;
+    border: 1px solid rgba(126, 200, 227, 0.2);
+    position: relative;
+    z-index: 5;
+}
+
+.mind-cloud-app .tip-label {
+    margin: 0 0 0.2rem 0;
+    font-size: 0.7rem;
+    color: #7AA3B8;
+    font-weight: 600;
+}
+
+.mind-cloud-app .tip-text {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #5B8BA5;
+    animation: mc-tip-fade 0.5s ease;
+}
+
+@keyframes mc-tip-fade {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ==================== SESSION COUNT BADGE ==================== */
+.mind-cloud-app .session-count {
+    position: absolute;
+    top: 0.4rem;
+    left: 0.4rem;
+    font-size: 0.55rem;
+    background: rgba(126, 200, 227, 0.3);
+    color: #5B8BA5;
+    padding: 0.1rem 0.4rem;
+    border-radius: 8px;
+    font-weight: 700;
+}

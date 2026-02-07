@@ -1,0 +1,823 @@
+/* ==================== ACORN ARCHIVE STYLES ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+.acorn-archive-app {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #FFF8E1 0%, #F5E6CC 50%, #E8D5B7 100%);
+    font-family: 'Nanum Gothic', sans-serif;
+    padding: 1rem;
+    padding-bottom: 2rem;
+}
+
+/* Header */
+.acorn-archive-app .app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    margin-bottom: 1rem;
+}
+
+.acorn-archive-app .app-header h1 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #5D4037;
+}
+
+.acorn-archive-app .back-link {
+    color: #8D6E63;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.acorn-archive-app .header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.acorn-archive-app .lang-toggle {
+    padding: 0.25rem 0.5rem;
+    background: rgba(141, 110, 99, 0.1);
+    border: 1px solid rgba(141, 110, 99, 0.3);
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #5D4037;
+    cursor: pointer;
+}
+
+.acorn-archive-app .acorn-badge {
+    background: linear-gradient(135deg, #8D6E63, #5D4037);
+    color: white;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+/* Stats Section */
+.acorn-archive-app .stats-section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.acorn-archive-app .stat-card {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    padding: 0.6rem 0.4rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.acorn-archive-app .stat-icon {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.1rem;
+}
+
+.acorn-archive-app .stat-value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #5D4037;
+}
+
+.acorn-archive-app .stat-label {
+    display: block;
+    font-size: 0.5rem;
+    color: #999;
+    text-transform: uppercase;
+}
+
+/* Oak Progress */
+.acorn-archive-app .oak-progress-section {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.acorn-archive-app .oak-progress-section h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.85rem;
+    color: #5D4037;
+}
+
+.acorn-archive-app .oak-visual {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.acorn-archive-app .oak-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+}
+
+.acorn-archive-app .oak-emoji-main {
+    font-size: 2rem;
+}
+
+.acorn-archive-app .oak-name {
+    font-size: 0.6rem;
+    color: #8D6E63;
+    font-weight: 700;
+}
+
+.acorn-archive-app .oak-info {
+    flex: 1;
+}
+
+.acorn-archive-app .oak-bar {
+    height: 10px;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 0.25rem;
+}
+
+.acorn-archive-app .oak-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #A5D6A7, #4CAF50);
+    border-radius: 5px;
+    transition: width 0.5s ease;
+}
+
+.acorn-archive-app .oak-need {
+    font-size: 0.6rem;
+    color: #999;
+}
+
+.acorn-archive-app .oak-stages-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    padding: 0 0.5rem;
+}
+
+.acorn-archive-app .oak-stage-dot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.3;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.acorn-archive-app .oak-stage-dot.reached {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Weekly Chart */
+.acorn-archive-app .week-chart {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.acorn-archive-app .week-chart h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.85rem;
+    color: #5D4037;
+}
+
+.acorn-archive-app .week-bars {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.4rem;
+    align-items: end;
+    height: 70px;
+}
+
+.acorn-archive-app .week-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.acorn-archive-app .week-day.today .wd-label {
+    color: #5D4037;
+    font-weight: 800;
+}
+
+.acorn-archive-app .wd-bar-container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.acorn-archive-app .wd-bar {
+    width: 70%;
+    background: linear-gradient(180deg, #8D6E63, #A1887F);
+    border-radius: 3px 3px 0 0;
+    transition: height 0.3s ease;
+    min-width: 8px;
+}
+
+.acorn-archive-app .wd-count {
+    font-size: 0.55rem;
+    color: #666;
+    font-weight: 700;
+    height: 12px;
+}
+
+.acorn-archive-app .wd-label {
+    font-size: 0.55rem;
+    color: #999;
+}
+
+/* Category Breakdown */
+.acorn-archive-app .category-breakdown {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 14px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.acorn-archive-app .category-breakdown h3 {
+    margin: 0 0 0.4rem 0;
+    font-size: 0.85rem;
+    color: #5D4037;
+}
+
+.acorn-archive-app .cb-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.acorn-archive-app .cb-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.acorn-archive-app .cb-emoji {
+    font-size: 0.9rem;
+    width: 20px;
+    text-align: center;
+}
+
+.acorn-archive-app .cb-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.acorn-archive-app .cb-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.acorn-archive-app .cb-count {
+    font-size: 0.65rem;
+    color: #999;
+    font-weight: 700;
+    width: 20px;
+    text-align: right;
+}
+
+/* Squirrel Section */
+.acorn-archive-app .squirrel-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1rem;
+    background: linear-gradient(135deg, rgba(141, 110, 99, 0.1), rgba(93, 64, 55, 0.08));
+    border-radius: 14px;
+    margin-bottom: 0.75rem;
+}
+
+.acorn-archive-app .squirrel-avatar {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+}
+
+.acorn-archive-app .squirrel-message {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #5D4037;
+    font-weight: 600;
+    animation: tip-fade 0.5s ease;
+}
+
+@keyframes tip-fade {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Search & Filter */
+.acorn-archive-app .search-filter-section {
+    margin-bottom: 0.75rem;
+}
+
+.acorn-archive-app .search-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.acorn-archive-app .search-icon {
+    font-size: 0.9rem;
+    opacity: 0.5;
+}
+
+.acorn-archive-app .search-bar input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 0.85rem;
+    font-family: inherit;
+    outline: none;
+    color: #333;
+}
+
+.acorn-archive-app .filter-pills {
+    display: flex;
+    gap: 0.3rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.acorn-archive-app .filter-pills::-webkit-scrollbar {
+    display: none;
+}
+
+.acorn-archive-app .filter-btn {
+    padding: 0.3rem 0.6rem;
+    border: 1px solid #E0E0E0;
+    background: white;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s;
+    color: #666;
+}
+
+.acorn-archive-app .filter-btn.active {
+    background: #FFF3E0;
+    border-color: #8D6E63;
+    color: #5D4037;
+}
+
+/* Collection Section */
+.acorn-archive-app .collection-section {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 16px;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.acorn-archive-app .collection-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.acorn-archive-app .collection-header h2 {
+    margin: 0;
+    font-size: 1rem;
+    color: #5D4037;
+}
+
+.acorn-archive-app .count-badge {
+    font-size: 0.7rem;
+    background: rgba(141, 110, 99, 0.15);
+    padding: 0.1rem 0.4rem;
+    border-radius: 8px;
+    color: #8D6E63;
+    margin-left: 0.3rem;
+}
+
+.acorn-archive-app .add-btn {
+    padding: 0.4rem 0.8rem;
+    background: linear-gradient(135deg, #8D6E63, #5D4037);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.acorn-archive-app .add-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3);
+}
+
+/* Acorn Grid */
+.acorn-archive-app .acorn-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.acorn-archive-app .acorn-card {
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+    border-radius: 12px;
+    border: 1px solid #FFE082;
+    border-left: 4px solid #8D6E63;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.acorn-archive-app .acorn-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.acorn-archive-app .acorn-card.pinned {
+    background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+    border-color: #FFB74D;
+}
+
+.acorn-archive-app .pin-indicator {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.4rem;
+    font-size: 0.7rem;
+}
+
+.acorn-archive-app .acorn-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.3rem;
+}
+
+.acorn-archive-app .acorn-emoji {
+    font-size: 1.2rem;
+}
+
+.acorn-archive-app .acorn-date {
+    font-size: 0.65rem;
+    color: #999;
+}
+
+.acorn-archive-app .acorn-content {
+    margin: 0 0 0.3rem 0;
+    font-size: 0.85rem;
+    color: #333;
+    line-height: 1.4;
+}
+
+.acorn-archive-app .acorn-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.acorn-archive-app .category-tag {
+    font-size: 0.55rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+}
+
+.acorn-archive-app .mood-emoji {
+    font-size: 0.9rem;
+}
+
+/* Empty State */
+.acorn-archive-app .empty-state {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.acorn-archive-app .empty-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    opacity: 0.4;
+}
+
+.acorn-archive-app .empty-state p {
+    color: #999;
+    font-size: 0.85rem;
+}
+
+/* Motivation */
+.acorn-archive-app .motivation-section {
+    text-align: center;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+}
+
+.acorn-archive-app .motivation-section p {
+    margin: 0;
+    color: #8D6E63;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+/* Modal */
+.acorn-archive-app .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.acorn-archive-app .modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+    animation: modal-pop 0.3s ease-out;
+}
+
+@keyframes modal-pop {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.acorn-archive-app .modal-content h2 {
+    margin: 0 0 1rem 0;
+    color: #5D4037;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.acorn-archive-app .category-picker {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+}
+
+.acorn-archive-app .category-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 0.5rem 0.3rem;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: #F5F5F5;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.acorn-archive-app .category-option.active {
+    transform: scale(1.05);
+}
+
+.acorn-archive-app .option-emoji {
+    font-size: 1.3rem;
+}
+
+.acorn-archive-app .option-label {
+    font-size: 0.55rem;
+    font-weight: 600;
+    color: #666;
+}
+
+.acorn-archive-app textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+    resize: none;
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+.acorn-archive-app textarea:focus {
+    border-color: #8D6E63;
+}
+
+/* Mood Picker */
+.acorn-archive-app .mood-picker {
+    margin-top: 0.75rem;
+}
+
+.acorn-archive-app .mood-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #666;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+
+.acorn-archive-app .mood-options {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.acorn-archive-app .mood-btn {
+    width: 36px;
+    height: 36px;
+    border: 2px solid #E0E0E0;
+    border-radius: 50%;
+    background: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.acorn-archive-app .mood-btn.active {
+    border-color: #8D6E63;
+    background: #FFF3E0;
+    transform: scale(1.1);
+}
+
+.acorn-archive-app .modal-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.acorn-archive-app .cancel-btn {
+    flex: 1;
+    padding: 0.6rem;
+    border: 1px solid #E0E0E0;
+    background: white;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #666;
+}
+
+.acorn-archive-app .save-btn {
+    flex: 1;
+    padding: 0.6rem;
+    border: none;
+    background: linear-gradient(135deg, #8D6E63, #5D4037);
+    color: white;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.acorn-archive-app .save-btn:hover {
+    transform: translateY(-1px);
+}
+
+/* Detail Modal */
+.acorn-archive-app .detail-modal {
+    text-align: center;
+}
+
+.acorn-archive-app .detail-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.acorn-archive-app .detail-content {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #333;
+    margin: 0 0 0.75rem 0;
+}
+
+.acorn-archive-app .detail-meta {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.acorn-archive-app .detail-date {
+    font-size: 0.75rem;
+    color: #999;
+}
+
+.acorn-archive-app .detail-mood {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.acorn-archive-app .detail-actions {
+    display: flex;
+    gap: 0.4rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.acorn-archive-app .pin-btn,
+.acorn-archive-app .del-btn,
+.acorn-archive-app .close-btn {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #E0E0E0;
+    background: white;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.acorn-archive-app .del-btn {
+    border-color: #FFCDD2;
+    color: #E53935;
+}
+
+.acorn-archive-app .close-btn {
+    background: #5D4037;
+    color: white;
+    border-color: #5D4037;
+}
+
+/* Reward Toast */
+.acorn-archive-app .reward-toast {
+    position: fixed;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #8D6E63, #5D4037);
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 2000;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    animation: toast-appear 0.5s ease-out;
+}
+
+@keyframes toast-appear {
+    from {
+        transform: translateX(-50%) translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.acorn-archive-app .toast-icon {
+    font-size: 1.2rem;
+}
+
+.acorn-archive-app .toast-title {
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.acorn-archive-app .toast-acorns {
+    font-size: 0.7rem;
+    opacity: 0.8;
+}

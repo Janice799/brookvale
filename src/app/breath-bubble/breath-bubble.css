@@ -1,0 +1,839 @@
+/* Breath Bubble - Cloud Haven Zone */
+/* Soft, dreamy, cloud-like aesthetic */
+
+.breath-bubble-app {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background: linear-gradient(180deg,
+            #E8F4F8 0%,
+            #D4E8F2 30%,
+            #C5DCE8 60%,
+            #B8D4E3 100%);
+    padding: 1rem;
+    padding-bottom: 3rem;
+    font-family: 'Nunito', system-ui, sans-serif;
+    position: relative;
+}
+
+/* Floating clouds background */
+.breath-bubble-app::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(ellipse 300px 150px at 10% 20%, rgba(255, 255, 255, 0.6) 0%, transparent 70%),
+        radial-gradient(ellipse 250px 120px at 80% 30%, rgba(255, 255, 255, 0.5) 0%, transparent 70%),
+        radial-gradient(ellipse 200px 100px at 30% 70%, rgba(255, 255, 255, 0.4) 0%, transparent 70%),
+        radial-gradient(ellipse 280px 140px at 70% 80%, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+    pointer-events: none;
+    animation: floatClouds 30s ease-in-out infinite;
+}
+
+@keyframes floatClouds {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(20px);
+    }
+}
+
+/* Header */
+.breath-bubble-app .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(136, 171, 189, 0.15);
+    position: relative;
+    z-index: 10;
+}
+
+.breath-bubble-app .app-header h1 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #5A8FA8;
+    margin: 0;
+}
+
+.breath-bubble-app .back-link {
+    color: #7BA3B8;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.breath-bubble-app .back-link:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateX(-3px);
+}
+
+.breath-bubble-app .acorn-badge {
+    background: linear-gradient(135deg, #8B5A2B, #A67548);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+/* Main Bubble Section */
+.bubble-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    position: relative;
+    z-index: 5;
+}
+
+/* The Breathing Bubble */
+.breath-bubble {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(200, 230, 255, 0.6) 40%,
+            rgba(150, 200, 240, 0.4) 70%,
+            rgba(120, 180, 220, 0.3) 100%);
+    box-shadow:
+        0 0 60px rgba(120, 180, 220, 0.4),
+        inset 0 0 30px rgba(255, 255, 255, 0.5),
+        0 20px 60px rgba(100, 160, 200, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: transform 4s ease-in-out;
+}
+
+.breath-bubble::before {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 20%;
+    width: 30%;
+    height: 20%;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    filter: blur(5px);
+}
+
+/* Breathing States */
+.breath-bubble.inhale {
+    transform: scale(1.5);
+}
+
+.breath-bubble.exhale {
+    transform: scale(1);
+}
+
+.breath-bubble.hold {
+    transform: scale(1.5);
+}
+
+/* Bubble Text */
+.bubble-text {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #5A8FA8;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+    z-index: 2;
+}
+
+/* Timer Display */
+.breath-timer {
+    margin-top: 2rem;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #5A8FA8;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Breathing Pattern Info */
+.pattern-info {
+    margin-top: 1rem;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    text-align: center;
+}
+
+.pattern-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #5A8FA8;
+    margin-bottom: 0.5rem;
+}
+
+.pattern-sequence {
+    font-size: 0.85rem;
+    color: #7BA3B8;
+}
+
+/* Control Buttons */
+.breath-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.control-btn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.start-btn {
+    background: linear-gradient(135deg, #7EC8E3, #5AA9C9);
+    color: white;
+    box-shadow: 0 4px 15px rgba(126, 200, 227, 0.4);
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(126, 200, 227, 0.5);
+}
+
+.stop-btn {
+    background: rgba(255, 255, 255, 0.8);
+    color: #7BA3B8;
+    border: 2px solid #C5DCE8;
+}
+
+.stop-btn:hover {
+    background: white;
+}
+
+/* Pattern Selection */
+.patterns-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px);
+    border-radius: 24px;
+    position: relative;
+    z-index: 5;
+}
+
+.patterns-section h2 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #5A8FA8;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.pattern-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+}
+
+.pattern-card {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.pattern-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(126, 200, 227, 0.3);
+}
+
+.pattern-card.active {
+    border-color: #7EC8E3;
+    background: white;
+}
+
+.pattern-card .pattern-emoji {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.pattern-card .pattern-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #5A8FA8;
+    margin-bottom: 0.25rem;
+}
+
+.pattern-card .pattern-desc {
+    font-size: 0.7rem;
+    color: #7BA3B8;
+}
+
+/* Stats Section */
+.stats-section {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    position: relative;
+    z-index: 5;
+}
+
+.stat-card {
+    flex: 1;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    text-align: center;
+}
+
+.stat-card .stat-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #5A8FA8;
+}
+
+.stat-card .stat-label {
+    font-size: 0.75rem;
+    color: #7BA3B8;
+    margin-top: 0.25rem;
+}
+
+/* Session Complete Toast */
+.session-toast {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #7EC8E3, #5AA9C9);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(126, 200, 227, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 1000;
+    animation: toastSlide 0.5s ease;
+}
+
+@keyframes toastSlide {
+    from {
+        transform: translateX(-50%) translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.session-toast .toast-icon {
+    font-size: 1.5rem;
+}
+
+.session-toast .toast-text {
+    font-weight: 700;
+}
+
+/* Motivation Quote */
+.motivation-section {
+    margin-top: 1.5rem;
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+    z-index: 5;
+}
+
+.motivation-section p {
+    font-size: 0.9rem;
+    color: #7BA3B8;
+    font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .breath-bubble {
+        width: 160px;
+        height: 160px;
+    }
+
+    .breath-bubble.inhale {
+        transform: scale(1.4);
+    }
+
+    .breath-timer {
+        font-size: 2.5rem;
+    }
+
+    .pattern-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ==================== ENHANCED HEADER ==================== */
+.breath-bubble-app .header-right {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+.breath-bubble-app .icon-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(126, 200, 227, 0.15);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.breath-bubble-app .icon-btn:hover {
+    background: rgba(126, 200, 227, 0.3);
+    transform: scale(1.1);
+}
+
+/* ==================== SOUND SELECTOR ==================== */
+.sound-section {
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 10;
+}
+
+.sound-selector {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+}
+
+.sound-btn {
+    width: 44px;
+    height: 44px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    font-size: 1.25rem;
+    transition: all 0.2s ease;
+}
+
+.sound-btn:hover {
+    background: white;
+    transform: scale(1.1);
+}
+
+.sound-btn.active {
+    border-color: #7EC8E3;
+    background: white;
+    box-shadow: 0 2px 10px rgba(126, 200, 227, 0.3);
+}
+
+/* ==================== ENHANCED BUBBLE ==================== */
+.breath-bubble .bubble-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.breath-bubble .bubble-timer {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #5A8FA8;
+    margin-top: 0.5rem;
+}
+
+.breath-bubble.complete {
+    animation: completePulse 0.5s ease;
+}
+
+@keyframes completePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Progress Ring */
+.progress-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.15);
+    pointer-events: none;
+}
+
+.breath-bubble.inhale .progress-ring {
+    transform: scale(1.7);
+    transition: transform 4s ease-in-out;
+}
+
+.breath-bubble.hold .progress-ring {
+    transform: scale(1.7);
+}
+
+.breath-bubble.exhale .progress-ring {
+    transform: scale(1.15);
+    transition: transform 4s ease-in-out;
+}
+
+.progress-ring-fill {
+    transition: stroke-dashoffset 0.05s linear;
+}
+
+/* ==================== CLICKABLE PATTERN ==================== */
+.pattern-name.clickable {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.pattern-name .info-icon {
+    font-size: 0.85rem;
+    opacity: 0.6;
+}
+
+.pattern-name.clickable:hover .info-icon {
+    opacity: 1;
+}
+
+/* ==================== STAT CARD HIGHLIGHT ==================== */
+.stat-card.highlight {
+    background: linear-gradient(135deg, rgba(126, 200, 227, 0.3), rgba(90, 169, 201, 0.2));
+}
+
+/* ==================== MODAL OVERLAY ==================== */
+.breath-bubble-app .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+    padding: 1rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.breath-bubble-app .modal-content {
+    background: linear-gradient(135deg, #F4FAFC, #E8F4F8);
+    padding: 2rem;
+    border-radius: 24px;
+    max-width: 450px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(90, 143, 168, 0.3);
+    animation: modalSlide 0.3s ease;
+}
+
+@keyframes modalSlide {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.breath-bubble-app .modal-content h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #5A8FA8;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.breath-bubble-app .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.1);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #5A8FA8;
+    transition: all 0.2s;
+}
+
+.breath-bubble-app .close-btn:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== STATS OVERVIEW ==================== */
+.stats-overview {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.overview-card {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1rem;
+    border-radius: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.overview-card.highlight {
+    background: linear-gradient(135deg, #C5E8F2, #B8DCE8);
+}
+
+.overview-card .ov-icon {
+    font-size: 1.5rem;
+}
+
+.overview-card .ov-number {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #5A8FA8;
+}
+
+.overview-card .ov-label {
+    font-size: 0.7rem;
+    color: #7BA3B8;
+}
+
+/* ==================== HISTORY ==================== */
+.history-section {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 1rem;
+    border-radius: 16px;
+}
+
+.history-section h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #5A8FA8;
+    margin: 0 0 1rem 0;
+}
+
+.empty-history {
+    text-align: center;
+    padding: 2rem;
+    color: #7BA3B8;
+    font-size: 0.9rem;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+}
+
+.history-emoji {
+    font-size: 1.25rem;
+}
+
+.history-name {
+    flex: 1;
+    font-weight: 600;
+    color: #5A8FA8;
+    font-size: 0.85rem;
+}
+
+.history-duration {
+    font-size: 0.8rem;
+    color: #7BA3B8;
+    padding: 0.25rem 0.5rem;
+    background: rgba(126, 200, 227, 0.15);
+    border-radius: 8px;
+}
+
+.history-date {
+    font-size: 0.75rem;
+    color: #9BB8C8;
+}
+
+/* ==================== PATTERN DETAIL MODAL ==================== */
+.pattern-modal {
+    text-align: center;
+}
+
+.pattern-detail-emoji {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+}
+
+.pattern-detail-desc {
+    color: #7BA3B8;
+    margin-bottom: 1.5rem;
+}
+
+.pattern-timing {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.timing-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    min-width: 70px;
+}
+
+.timing-label {
+    font-size: 0.7rem;
+    color: #7BA3B8;
+    margin-bottom: 0.25rem;
+}
+
+.timing-value {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #5A8FA8;
+}
+
+.pattern-benefit {
+    background: rgba(126, 200, 227, 0.15);
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.pattern-benefit strong {
+    color: #5A8FA8;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.pattern-benefit p {
+    color: #7BA3B8;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.select-pattern-btn {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #7EC8E3, #5AA9C9);
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.select-pattern-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(126, 200, 227, 0.4);
+}
+
+/* ==================== MOBILE RESPONSIVE ==================== */
+@media (max-width: 480px) {
+    .sound-selector {
+        gap: 0.4rem;
+    }
+
+    .sound-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+    }
+
+    .stats-overview {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .breath-bubble-app .modal-content {
+        padding: 1.5rem;
+        max-height: 85vh;
+    }
+
+    .pattern-timing {
+        gap: 0.5rem;
+    }
+
+    .timing-item {
+        min-width: 60px;
+        padding: 0.5rem 0.75rem;
+    }
+}

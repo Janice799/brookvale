@@ -1,0 +1,871 @@
+/* ==================== KARMA RIPPLE STYLES ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+.karma-ripple-app {
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #E0F7FA 0%, #B2EBF2 30%, #80DEEA 70%, #4DD0E1 100%);
+    padding: 1rem;
+    padding-bottom: 3rem;
+    font-family: 'Nanum Gothic', sans-serif;
+    position: relative;
+}
+
+/* Header */
+.karma-ripple-app .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 188, 212, 0.2);
+    margin-bottom: 1rem;
+}
+
+.karma-ripple-app .back-link {
+    color: #00ACC1;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.2s;
+}
+
+.karma-ripple-app .back-link:hover {
+    transform: translateX(-4px);
+}
+
+.karma-ripple-app h1 {
+    font-size: 1.4rem;
+    color: #006064;
+    margin: 0;
+}
+
+.karma-ripple-app .acorn-badge {
+    background: linear-gradient(135deg, #8D6E63, #5D4037);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+/* Language Toggle */
+.karma-ripple-app .language-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.karma-ripple-app .lang-btn {
+    padding: 0.5rem 1.5rem;
+    border: 2px solid #00ACC1;
+    background: white;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.karma-ripple-app .lang-btn.active {
+    background: #00ACC1;
+    color: white;
+}
+
+/* Pond Section */
+.karma-ripple-app .pond-section {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.karma-ripple-app .pond {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.karma-ripple-app .water-surface {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%,
+            rgba(255, 255, 255, 0.4) 0%,
+            rgba(100, 181, 246, 0.6) 30%,
+            rgba(66, 165, 245, 0.8) 60%,
+            rgba(33, 150, 243, 0.9) 100%);
+    box-shadow:
+        0 10px 40px rgba(33, 150, 243, 0.4),
+        inset 0 -10px 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.karma-ripple-app .pond-emoji {
+    font-size: 3rem;
+    animation: float 3s ease-in-out infinite;
+    z-index: 10;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.karma-ripple-app .pond-reflection {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 20px;
+    background: rgba(33, 150, 243, 0.3);
+    border-radius: 50%;
+    filter: blur(10px);
+}
+
+/* Ripple Animation */
+.karma-ripple-app .ripple {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    animation: ripple-expand 2s ease-out forwards;
+}
+
+.karma-ripple-app .ripple-1 {
+    animation-delay: 0s;
+}
+
+.karma-ripple-app .ripple-2 {
+    animation-delay: 0.4s;
+}
+
+.karma-ripple-app .ripple-3 {
+    animation-delay: 0.8s;
+}
+
+@keyframes ripple-expand {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+
+    100% {
+        width: 200px;
+        height: 200px;
+        opacity: 0;
+    }
+}
+
+.karma-ripple-app .pond.animating .pond-emoji {
+    animation: drop 0.5s ease-in;
+}
+
+@keyframes drop {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(20px) scale(0.8);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+.karma-ripple-app .pond-label {
+    margin-top: 1rem;
+    color: #006064;
+    font-weight: 600;
+}
+
+/* Stats Section */
+.karma-ripple-app .stats-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 30px rgba(0, 188, 212, 0.2);
+}
+
+.karma-ripple-app .stats-section h2 {
+    margin: 0 0 1rem 0;
+    color: #006064;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.karma-ripple-app .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+}
+
+.karma-ripple-app .stat-card {
+    text-align: center;
+    padding: 1rem 0.5rem;
+    background: linear-gradient(135deg, #E0F7FA, #B2EBF2);
+    border-radius: 12px;
+}
+
+.karma-ripple-app .stat-icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.karma-ripple-app .stat-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #006064;
+    display: block;
+}
+
+.karma-ripple-app .stat-label {
+    font-size: 0.65rem;
+    color: #00838F;
+}
+
+/* Create Section */
+.karma-ripple-app .create-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 30px rgba(0, 188, 212, 0.2);
+}
+
+.karma-ripple-app .create-section h2 {
+    margin: 0 0 1rem 0;
+    color: #006064;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.karma-ripple-app .create-section textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #B2EBF2;
+    border-radius: 12px;
+    font-size: 1rem;
+    resize: none;
+    transition: border-color 0.3s;
+    font-family: inherit;
+    margin-bottom: 1rem;
+}
+
+.karma-ripple-app .create-section textarea:focus {
+    outline: none;
+    border-color: #00ACC1;
+}
+
+.karma-ripple-app .category-picker {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.karma-ripple-app .category-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    background: #E0F7FA;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.karma-ripple-app .category-btn:hover {
+    transform: scale(1.1);
+}
+
+.karma-ripple-app .category-btn.active {
+    transform: scale(1.15);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.karma-ripple-app .create-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    background: linear-gradient(135deg, #00ACC1, #00838F);
+    color: white;
+    border-radius: 16px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 172, 193, 0.4);
+}
+
+.karma-ripple-app .create-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 172, 193, 0.5);
+}
+
+.karma-ripple-app .create-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Acts Section */
+.karma-ripple-app .acts-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 8px 30px rgba(0, 188, 212, 0.2);
+}
+
+.karma-ripple-app .acts-section h2 {
+    margin: 0 0 1rem 0;
+    color: #006064;
+    font-size: 1.1rem;
+}
+
+.karma-ripple-app .empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: #00838F;
+}
+
+.karma-ripple-app .empty-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    opacity: 0.5;
+}
+
+.karma-ripple-app .acts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.karma-ripple-app .act-card {
+    background: linear-gradient(135deg, #E0F7FA, #F5F5F5);
+    border-radius: 16px;
+    padding: 1rem;
+    position: relative;
+}
+
+.karma-ripple-app .act-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.karma-ripple-app .act-emoji {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+}
+
+.karma-ripple-app .act-meta {
+    flex: 1;
+}
+
+.karma-ripple-app .act-date {
+    display: block;
+    font-size: 0.875rem;
+    color: #00838F;
+    font-weight: 600;
+}
+
+.karma-ripple-app .ripple-count {
+    font-size: 0.75rem;
+    color: #00ACC1;
+}
+
+.karma-ripple-app .act-card .delete-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(239, 83, 80, 0.2);
+    color: #EF5350;
+    cursor: pointer;
+    font-size: 1rem;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.karma-ripple-app .act-card:hover .delete-btn {
+    opacity: 1;
+}
+
+.karma-ripple-app .delete-btn:hover {
+    background: #EF5350;
+    color: white;
+}
+
+.karma-ripple-app .act-text {
+    margin: 0 0 0.75rem 0;
+    color: #333;
+    line-height: 1.5;
+}
+
+.karma-ripple-app .ripple-visualization {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.karma-ripple-app .ripple-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: ripple-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ripple-pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+/* Motivation Section */
+.karma-ripple-app .motivation-section {
+    text-align: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+}
+
+.karma-ripple-app .motivation-section p {
+    margin: 0;
+    color: #006064;
+    font-weight: 600;
+}
+
+/* Reward Toast */
+.karma-ripple-app .reward-toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #00ACC1, #00838F);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 8px 30px rgba(0, 172, 193, 0.5);
+    z-index: 2000;
+    animation: toast-appear 0.5s ease-out;
+}
+
+@keyframes toast-appear {
+    from {
+        transform: translateX(-50%) translateY(-100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+    }
+}
+
+.karma-ripple-app .toast-icon {
+    font-size: 2rem;
+}
+
+.karma-ripple-app .toast-title {
+    font-weight: 700;
+}
+
+.karma-ripple-app .toast-reward {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Header Right */
+.karma-ripple-app .header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.karma-ripple-app .lang-toggle {
+    background: transparent;
+    border: 1px solid #00ACC1;
+    color: #00ACC1;
+    padding: 0.3rem 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.karma-ripple-app .lang-toggle:hover {
+    background: rgba(0, 172, 193, 0.1);
+}
+
+/* ==================== KARMA LEVEL SECTION ==================== */
+.karma-ripple-app .karma-level-section {
+    margin-bottom: 1rem;
+}
+
+.karma-ripple-app .karma-level-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 188, 212, 0.15);
+}
+
+.karma-ripple-app .level-emoji {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.karma-ripple-app .level-info {
+    flex-shrink: 0;
+}
+
+.karma-ripple-app .level-name {
+    font-weight: 800;
+    color: #006064;
+    font-size: 1.1rem;
+}
+
+.karma-ripple-app .level-label {
+    font-size: 0.75rem;
+    color: #00838F;
+}
+
+.karma-ripple-app .level-progress-container {
+    flex: 1;
+    min-width: 0;
+}
+
+.karma-ripple-app .level-progress-bar {
+    height: 8px;
+    background: #E0F7FA;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.3rem;
+}
+
+.karma-ripple-app .level-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ACC1, #4ECDC4);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.karma-ripple-app .level-next {
+    font-size: 0.65rem;
+    color: #00838F;
+    text-align: right;
+}
+
+/* ==================== HEATMAP SECTION ==================== */
+.karma-ripple-app .heatmap-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 188, 212, 0.15);
+}
+
+.karma-ripple-app .heatmap-section h3 {
+    margin: 0 0 1rem 0;
+    color: #006064;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.karma-ripple-app .heatmap-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.25rem;
+}
+
+.karma-ripple-app .heatmap-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    flex: 1;
+}
+
+.karma-ripple-app .heatmap-cell.today {
+    position: relative;
+}
+
+.karma-ripple-app .heatmap-cell.today::after {
+    content: '•';
+    position: absolute;
+    bottom: -8px;
+    color: #00ACC1;
+    font-size: 1rem;
+}
+
+.karma-ripple-app .heatmap-dot {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.karma-ripple-app .heatmap-day {
+    font-size: 0.65rem;
+    color: #00838F;
+    font-weight: 600;
+}
+
+.karma-ripple-app .heatmap-count {
+    font-size: 0.6rem;
+    color: #006064;
+    font-weight: 700;
+}
+
+/* ==================== CATEGORY BREAKDOWN ==================== */
+.karma-ripple-app .category-breakdown {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 188, 212, 0.15);
+}
+
+.karma-ripple-app .category-breakdown h3 {
+    margin: 0 0 1rem 0;
+    color: #006064;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.karma-ripple-app .breakdown-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.karma-ripple-app .breakdown-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.karma-ripple-app .breakdown-emoji {
+    font-size: 1rem;
+    flex-shrink: 0;
+    width: 24px;
+    text-align: center;
+}
+
+.karma-ripple-app .breakdown-bar-track {
+    flex: 1;
+    height: 10px;
+    background: #E0F7FA;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.karma-ripple-app .breakdown-bar-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.5s ease;
+    min-width: 4px;
+}
+
+.karma-ripple-app .breakdown-count {
+    font-size: 0.75rem;
+    color: #006064;
+    font-weight: 700;
+    width: 20px;
+    text-align: right;
+}
+
+/* ==================== INSPIRATION SECTION ==================== */
+.karma-ripple-app .inspiration-section {
+    margin-bottom: 1rem;
+}
+
+.karma-ripple-app .inspiration-section h3 {
+    margin: 0 0 0.75rem 0;
+    color: #006064;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.karma-ripple-app .inspiration-card {
+    background: linear-gradient(135deg, rgba(0, 172, 193, 0.1), rgba(78, 205, 196, 0.15));
+    border: 1px solid rgba(0, 172, 193, 0.2);
+    border-radius: 16px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.karma-ripple-app .inspiration-text {
+    margin: 0 0 0.5rem 0;
+    color: #006064;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.karma-ripple-app .inspiration-author {
+    margin: 0;
+    color: #00838F;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ==================== SUGGESTION SECTION ==================== */
+.karma-ripple-app .suggestion-section {
+    margin-bottom: 1rem;
+}
+
+.karma-ripple-app .suggestion-section h3 {
+    margin: 0 0 0.75rem 0;
+    color: #006064;
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.karma-ripple-app .suggestion-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 1.25rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 188, 212, 0.1);
+}
+
+.karma-ripple-app .suggestion-text {
+    margin: 0 0 0.75rem 0;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.karma-ripple-app .suggestion-btn {
+    background: transparent;
+    border: 1px solid #00ACC1;
+    color: #00ACC1;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.karma-ripple-app .suggestion-btn:hover {
+    background: rgba(0, 172, 193, 0.1);
+}
+
+/* ==================== FILTER PILLS ==================== */
+.karma-ripple-app .acts-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.karma-ripple-app .acts-header h2 {
+    margin: 0;
+}
+
+.karma-ripple-app .filter-pills {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.karma-ripple-app .filter-pill {
+    background: transparent;
+    border: 1px solid #B2EBF2;
+    color: #00838F;
+    padding: 0.3rem 0.6rem;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: all 0.2s;
+}
+
+.karma-ripple-app .filter-pill.active {
+    background: #00ACC1;
+    border-color: #00ACC1;
+    color: white;
+}
+
+/* Category Button Labels */
+.karma-ripple-app .category-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    width: auto;
+    height: auto;
+    padding: 0.6rem 0.5rem;
+    border-radius: 12px;
+}
+
+.karma-ripple-app .cat-label {
+    font-size: 0.55rem;
+    display: block;
+}
+
+/* Ripple 4 */
+.karma-ripple-app .ripple-4 {
+    animation-delay: 1.2s;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .karma-ripple-app .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .karma-ripple-app .stat-value {
+        font-size: 1.25rem;
+    }
+
+    .karma-ripple-app .category-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.25rem;
+    }
+}
