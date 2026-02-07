@@ -2,8 +2,8 @@
 /* Peaceful meditation with soft gradients */
 
 .mind-cloud-app {
-    min-height: 100vh;
-    max-height: 100vh;
+    min-height: 100dvh;
+
     overflow-y: auto;
     background: linear-gradient(180deg,
             #E0F0FA 0%,
@@ -11,7 +11,7 @@
             #C0E0F0 60%,
             #B0D8EB 100%);
     padding: 1rem;
-    padding-bottom: 3rem;
+    padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
     font-family: 'Nunito', system-ui, sans-serif;
     position: relative;
 }

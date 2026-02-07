@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Language, defaultLanguage } from '@/lib/i18n';
 import { useAcornStore } from '@/lib/acorn-context';
+import { BackLink } from '@/components/BackLink';
 import './goal-tycoon.css';
 
 // Types
@@ -411,7 +412,7 @@ export default function GoalTycoonPage() {
 
             {/* Header */}
             <header className="app-header">
-                <a href="/" className="back-link">{t.back}</a>
+                <BackLink>{t.back}</BackLink>
                 <h1>🏗️ {t.title}</h1>
                 <div className="header-right">
                     <button

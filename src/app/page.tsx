@@ -10,15 +10,16 @@ import { questDefinitions, defaultPlayerProfile, PlayerProfile, timeUntilDailyRe
 import { SoundControls, useBrookvaleSound } from '@/components/SoundControls';
 import { playUISound, startZoneAmbient, initializeAudio } from '@/lib/soundManager';
 import type { ZoneAmbient } from '@/lib/soundManager';
-import { DynamicLighting, DynamicSky } from '@/components/DynamicLighting';
-import { ParticleEffectManager, triggerParticleEffect } from '@/components/ParticleEffects';
-import { WeatherManager, WeatherControl } from '@/components/WeatherSystem';
-import { Lake, Pond, WaterSurface } from '@/components/WaterSystem';
-import { LoadingScreen, TouchJoystick, usePerformanceLevel, getQualitySettings, PerformanceIndicator } from '@/components/PerformanceOptimization';
-import { IslandWorld, APP_ISLANDS, getCircularPosition } from '@/components/AppIslands';
-import { WoodenBridge, WoodenBrookvaleLogo, generateBridgeConnections } from '@/components/WorldElements';
-import { PostProcessingEffects, PRESET_CINEMATIC } from '@/components/PostProcessing';
-import { DioramaStorytelling } from '@/components/DioramaStorytelling';
+import { DynamicLighting, DynamicSky } from '@/components/3d/DynamicLighting';
+import { ParticleEffectManager, triggerParticleEffect } from '@/components/3d/ParticleEffects';
+import { WeatherManager, WeatherControl } from '@/components/3d/WeatherSystem';
+import { Lake, Pond, WaterSurface } from '@/components/3d/WaterSystem';
+import { LoadingScreen, TouchJoystick, usePerformanceLevel, getQualitySettings, PerformanceIndicator } from '@/components/3d/PerformanceOptimization';
+import { IslandWorld, APP_ISLANDS, getCircularPosition } from '@/components/3d/AppIslands';
+import { WoodenBridge, WoodenBrookvaleLogo, generateBridgeConnections } from '@/components/3d/WorldElements';
+import { PostProcessingEffects, PRESET_CINEMATIC } from '@/components/3d/PostProcessing';
+import { DioramaStorytelling } from '@/components/3d/DioramaStorytelling';
+import { usePageTransition } from '@/components/PageTransition';
 
 // ==================== MOBILE DETECTION HOOK ====================
 function useIsMobile() {
@@ -2143,6 +2144,11 @@ function FollowCamera({ target, isMoving }: { target: [number, number, number]; 
     const targetVec = useRef(new THREE.Vector3(...target));
     const lastTarget = useRef(new THREE.Vector3(...target));
 
+    // World boundary constants (archipelago is ~50 units radius circle)
+    const WORLD_BOUNDS = 70;
+    const CAM_Y_MIN = 3;
+    const CAM_Y_MAX = 100;
+
     useFrame(() => {
         // Update target vector from props
         targetVec.current.set(target[0], target[1], target[2]);
@@ -2162,6 +2168,19 @@ function FollowCamera({ target, isMoving }: { target: [number, number, number]; 
             controlsRef.current.update();
         }
 
+        // Clamp camera position within world bounds to prevent flying into void
+        camera.position.x = THREE.MathUtils.clamp(camera.position.x, -WORLD_BOUNDS, WORLD_BOUNDS);
+        camera.position.z = THREE.MathUtils.clamp(camera.position.z, -WORLD_BOUNDS, WORLD_BOUNDS);
+        camera.position.y = THREE.MathUtils.clamp(camera.position.y, CAM_Y_MIN, CAM_Y_MAX);
+
+        // Clamp orbit target too so it doesn't drift outside world
+        if (controlsRef.current) {
+            const t = controlsRef.current.target;
+            t.x = THREE.MathUtils.clamp(t.x, -WORLD_BOUNDS, WORLD_BOUNDS);
+            t.z = THREE.MathUtils.clamp(t.z, -WORLD_BOUNDS, WORLD_BOUNDS);
+            t.y = THREE.MathUtils.clamp(t.y, -2, 20);
+        }
+
         // Update last target for next frame
         lastTarget.current.copy(controlsRef.current?.target || targetVec.current);
     });
@@ -2172,9 +2191,9 @@ function FollowCamera({ target, isMoving }: { target: [number, number, number]; 
             enablePan={true}
             enableZoom={true}
             enableRotate={true}
-            minPolarAngle={Math.PI / 8}
-            maxPolarAngle={Math.PI / 2.2}
-            minDistance={5}
+            minPolarAngle={Math.PI / 6}
+            maxPolarAngle={Math.PI / 2.4}
+            minDistance={10}
             maxDistance={120}
             target={target}
         />
@@ -2449,9 +2468,15 @@ function QuestPanel({
 export default function BrookvaleWorld() {
     const router = useRouter();
     const isMobile = useIsMobile();
+    const { navigateWithTransition } = usePageTransition();
 
     // Mobile redirect state
-    const [mobileRedirectDismissed, setMobileRedirectDismissed] = useState(false);
+    const [mobileRedirectDismissed, setMobileRedirectDismissed] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('brookvale-view-mode') === '3d';
+        }
+        return false;
+    });
 
     // Start with null to avoid SSR/client hydration mismatch
     // Will be set in useEffect after client-side localStorage check
@@ -2596,7 +2621,7 @@ export default function BrookvaleWorld() {
     const currentZone = getCurrentZone();
 
     // ==================== MOBILE REDIRECT BANNER ====================
-    // Show mobile optimization banner on mobile devices
+    // Show mobile optimization banner on mobile devices (respects saved preference)
     const MobileBanner = () => (
         isMobile && !mobileRedirectDismissed ? (
             <div style={{
@@ -2614,11 +2639,14 @@ export default function BrookvaleWorld() {
                 gap: '12px',
             }}>
                 <div style={{ color: 'white', fontSize: '0.95rem', textAlign: 'center' }}>
-                    📱 모바일에 최적화된 버전이 있어요!
+                    📱 {language === 'ko' ? '모바일에 최적화된 2D 버전이 있어요!' : 'A mobile-optimized 2D version is available!'}
                 </div>
                 <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
                     <button
-                        onClick={() => router.push('/mobile')}
+                        onClick={() => {
+                            localStorage.setItem('brookvale-view-mode', '2d');
+                            navigateWithTransition('/mobile');
+                        }}
                         style={{
                             padding: '10px 24px',
                             background: 'linear-gradient(135deg, #FFD54F, #FFA726)',
@@ -2630,10 +2658,13 @@ export default function BrookvaleWorld() {
                             fontSize: '0.9rem',
                         }}
                     >
-                        🗺️ 모바일 맵으로 이동
+                        🗺️ {language === 'ko' ? '2D 맵으로 이동' : 'Switch to 2D Map'}
                     </button>
                     <button
-                        onClick={() => setMobileRedirectDismissed(true)}
+                        onClick={() => {
+                            setMobileRedirectDismissed(true);
+                            localStorage.setItem('brookvale-view-mode', '3d');
+                        }}
                         style={{
                             padding: '10px 16px',
                             background: 'rgba(255, 255, 255, 0.1)',
@@ -2644,7 +2675,7 @@ export default function BrookvaleWorld() {
                             fontSize: '0.9rem',
                         }}
                     >
-                        3D로 계속하기
+                        {language === 'ko' ? '3D로 계속하기' : 'Continue in 3D'}
                     </button>
                 </div>
             </div>
@@ -2810,6 +2841,40 @@ export default function BrookvaleWorld() {
                     🎮 WASD to move • Shift to run • 🖱️ Drag to rotate • Scroll to zoom
                 </div>
 
+                {/* 2D/3D View Toggle */}
+                <button
+                    onClick={() => {
+                        localStorage.setItem('brookvale-view-mode', '2d');
+                        navigateWithTransition('/mobile');
+                    }}
+                    title={language === 'ko' ? '2D 맵으로 전환' : 'Switch to 2D Map'}
+                    style={{
+                        position: 'fixed',
+                        bottom: '240px',
+                        left: '20px',
+                        width: '150px',
+                        padding: '8px 0',
+                        background: 'rgba(255, 255, 255, 0.9)',
+                        backdropFilter: 'blur(10px)',
+                        border: 'none',
+                        borderRadius: '10px',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '6px',
+                        fontSize: '0.75rem',
+                        fontWeight: 600,
+                        color: '#2D6A4F',
+                        boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
+                        transition: 'all 0.3s ease',
+                        zIndex: 100,
+                    }}
+                >
+                    <span style={{ fontSize: '1rem' }}>🗺️</span>
+                    <span>{language === 'ko' ? '2D 맵 보기' : '2D Map View'}</span>
+                </button>
+
                 {/* Minimap */}
                 <div style={{
                     position: 'fixed',
@@ -2951,13 +3016,12 @@ export default function BrookvaleWorld() {
                         <p className="modal-description">
                             {t.landmarks[selectedLandmark.id as keyof typeof t.landmarks]?.desc || ''}
                         </p>
-                        <a
-                            href={`/${selectedLandmark.id}`}
+                        <button
                             className="modal-launch-btn"
-                            style={{ textDecoration: 'none', display: 'inline-block' }}
+                            onClick={() => navigateWithTransition(`/${selectedLandmark.id}`)}
                         >
                             {t.ui.launchApp}
-                        </a>
+                        </button>
                     </div>
                 </div>
             )}

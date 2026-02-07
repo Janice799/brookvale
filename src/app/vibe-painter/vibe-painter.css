@@ -2,12 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
 
 .vibe-painter-app {
-    min-height: 100vh;
-    max-height: 100vh;
+    min-height: 100dvh;
+
     overflow-y: auto;
     background: linear-gradient(180deg, #E8D5F2 0%, #D4B8E8 50%, #C9A8E0 100%);
     padding: 1rem;
-    padding-bottom: 3rem;
+    padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
     font-family: 'Nanum Gothic', sans-serif;
     position: relative;
 }

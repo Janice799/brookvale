@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
 
 .stretch-timer-app {
-    min-height: 100vh;
-    max-height: 100vh;
+    min-height: 100dvh;
+
     overflow-y: auto;
     background: linear-gradient(180deg, #E8F5E9 0%, #C8E6C9 50%, #A5D6A7 100%);
     font-family: 'Nanum Gothic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

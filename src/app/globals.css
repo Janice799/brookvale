@@ -1,5 +1,43 @@
-/* ==================== BROOKVALE GAME WORLD STYLES ==================== */
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+/* ==================== BROOKVALE GAME WORLD STYLES ==================== */
+
+/* ==================== PAGE TRANSITION SYSTEM ==================== */
+.page-transition-wrapper {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-transition-wrapper.page-exit {
+    opacity: 0;
+    transform: scale(0.98);
+    pointer-events: none;
+}
+
+.page-transition-wrapper.page-enter {
+    animation: pageEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pageEnter {
+    0% {
+        opacity: 0;
+        transform: scale(1.02);
+        filter: blur(4px);
+    }
+
+    60% {
+        opacity: 1;
+        filter: blur(0px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0px);
+    }
+}
 
 :root {
     --forest-green: #78C091;

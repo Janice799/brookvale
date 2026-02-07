@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Language, defaultLanguage } from '@/lib/i18n';
 import { useAcornStore } from '@/lib/acorn-context';
+import { BackLink } from '@/components/BackLink';
 import './focus-cat.css';
 
 type TimerMode = 'focus' | 'shortBreak' | 'longBreak';
@@ -327,8 +328,15 @@ export default function FocusCatPage() {
         }
     }, [settings.soundEnabled]);
 
+    // Ref to prevent double-completion (e.g., skip button + timer reaching 0)
+    const completionLock = useRef(false);
+
     // Handle timer completion
     const handleTimerComplete = useCallback(() => {
+        // Guard: prevent double-completion race condition
+        if (completionLock.current) return;
+        completionLock.current = true;
+
         setIsRunning(false);
         playSound();
 
@@ -372,8 +380,14 @@ export default function FocusCatPage() {
 
             saveStats(newStats);
 
-            // Check for level up
-            const newLevel = getCatLevel();
+            // Check for level up using newStats directly (not stale React state)
+            const checkLevel = (totalMinutes: number) => {
+                for (let i = CAT_LEVELS.length - 1; i >= 0; i--) {
+                    if (totalMinutes >= CAT_LEVELS[i].minMinutes) return CAT_LEVELS[i];
+                }
+                return CAT_LEVELS[0];
+            };
+            const newLevel = checkLevel(newStats.totalMinutes);
             if (newLevel.level !== previousLevel.level) {
                 setShowLevelUp(true);
                 setTimeout(() => setShowLevelUp(false), 3000);
@@ -393,45 +407,58 @@ export default function FocusCatPage() {
                 setTimeout(() => {
                     setMode('longBreak');
                     setTimeLeft(getTimerDuration('longBreak'));
+                    completionLock.current = false;
                 }, 3000);
             } else {
                 setTimeout(() => {
                     setMode('shortBreak');
                     setTimeLeft(getTimerDuration('shortBreak'));
+                    completionLock.current = false;
                 }, 3000);
             }
         } else {
             setCatState('sleeping');
             setMode('focus');
             setTimeLeft(getTimerDuration('focus'));
+            completionLock.current = false;
         }
     }, [mode, stats, settings.focusDuration, earnAcorns, saveStats, getCatLevel, getTimerDuration, playSound]);
 
-    // Handle timer
+    // Store handleTimerComplete in a ref to avoid re-creating the interval
+    const handleTimerCompleteRef = useRef(handleTimerComplete);
+    handleTimerCompleteRef.current = handleTimerComplete;
+
+    // Handle timer — uses ref to avoid interval recreation on every dependency change
     useEffect(() => {
         if (isRunning && timeLeft > 0) {
             intervalRef.current = setInterval(() => {
-                setTimeLeft(prev => prev - 1);
+                setTimeLeft(prev => {
+                    if (prev <= 1) {
+                        // Timer reaching 0 — complete in the next tick
+                        setTimeout(() => handleTimerCompleteRef.current(), 0);
+                        return 0;
+                    }
+                    return prev - 1;
+                });
             }, 1000);
-        } else if (timeLeft === 0 && isRunning) {
-            handleTimerComplete();
         }
 
         return () => {
             if (intervalRef.current) clearInterval(intervalRef.current);
         };
-    }, [isRunning, timeLeft, handleTimerComplete]);
+    }, [isRunning, timeLeft]);
 
-    // Update cat state based on mode and running
+    // Update cat state based on mode and running (removed catState from deps to prevent loops)
     useEffect(() => {
-        if (!isRunning && catState !== 'happy' && catState !== 'sleeping') {
-            setCatState('idle');
-        } else if (isRunning && mode === 'focus') {
+        if (isRunning && mode === 'focus') {
             setCatState('focus');
         } else if (isRunning) {
             setCatState('break');
+        } else {
+            // Only reset to idle if not in a temporary celebration/sleep state
+            setCatState(prev => (prev === 'happy' || prev === 'sleeping') ? prev : 'idle');
         }
-    }, [isRunning, mode, catState]);
+    }, [isRunning, mode]);
 
     const toggleTimer = () => {
         setIsRunning(!isRunning);
@@ -475,7 +502,7 @@ export default function FocusCatPage() {
         <div className="focus-cat-app">
             {/* Header */}
             <header className="app-header">
-                <a href="/" className="back-link">{t.back}</a>
+                <BackLink>{t.back}</BackLink>
                 <h1>🐱 {t.title}</h1>
                 <div className="header-right">
                     <button className="icon-btn" onClick={() => setShowStats(!showStats)}>📊</button>

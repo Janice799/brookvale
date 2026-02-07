@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
 
 .daily-quest-app {
-    min-height: 100vh;
-    max-height: 100vh;
+    min-height: 100dvh;
+
     overflow-y: auto;
     background: linear-gradient(180deg, #FFF3E0 0%, #FFE0B2 50%, #FFCC80 100%);
     font-family: 'Nanum Gothic', sans-serif;

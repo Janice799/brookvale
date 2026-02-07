@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
 
 .acorn-archive-app {
-    min-height: 100vh;
-    max-height: 100vh;
+    min-height: 100dvh;
+
     overflow-y: auto;
     background: linear-gradient(180deg, #FFF8E1 0%, #F5E6CC 50%, #E8D5B7 100%);
     font-family: 'Nanum Gothic', sans-serif;

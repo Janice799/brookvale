@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Language, defaultLanguage } from '@/lib/i18n';
 import { useAcornStore } from '@/lib/acorn-context';
+import { BackLink } from '@/components/BackLink';
 import './vibe-painter.css';
 
 // ==================== TYPES ====================
@@ -574,7 +575,7 @@ export default function VibePainterPage() {
 
             {/* Header */}
             <header className="app-header">
-                <a href="/" className="back-link">{t.back}</a>
+                <BackLink>{t.back}</BackLink>
                 <h1>🎨 {t.title}</h1>
                 <div className="header-right">
                     <button className="icon-btn" onClick={() => setShowStats(true)}>📊</button>

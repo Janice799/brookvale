@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import MobileWorldMap from '@/components/MobileWorldMap';
+import { usePageTransition } from '@/components/PageTransition';
 
 // App metadata for preview toast
 const APP_META: Record<string, { emoji: string; name: string; nameKo: string; desc: string; descKo: string; color: string }> = {
@@ -27,6 +28,7 @@ const APP_META: Record<string, { emoji: string; name: string; nameKo: string; de
 
 export default function MobilePage() {
     const router = useRouter();
+    const { navigateWithTransition } = usePageTransition();
     const [selectedApp, setSelectedApp] = useState<string | null>(null);
     const [language, setLanguage] = useState<'en' | 'ko'>('ko');
     const [showToast, setShowToast] = useState(false);
@@ -34,13 +36,21 @@ export default function MobilePage() {
     // Quest apps (connect to your actual quest system later)
     const questApps = ['focus-cat', 'tiny-wins', 'daily-quest'];
 
+    // Load language preference
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const savedLang = localStorage.getItem('brookvale-language') as 'en' | 'ko';
+            if (savedLang) setLanguage(savedLang);
+        }
+    }, []);
+
     const handleAppClick = (appId: string) => {
         setSelectedApp(appId);
         setShowToast(true);
 
-        // Navigate after a brief visual feedback delay
+        // Navigate with transition after a brief visual feedback delay
         setTimeout(() => {
-            router.push(`/${appId}`);
+            navigateWithTransition(`/${appId}`);
         }, 300);
     };
 
@@ -85,6 +95,26 @@ export default function MobilePage() {
                     🌰 Brookvale
                 </div>
                 <div style={{ display: 'flex', gap: '6px' }}>
+                    {/* 3D View Toggle */}
+                    <button
+                        onClick={() => {
+                            localStorage.setItem('brookvale-view-mode', '3d');
+                            navigateWithTransition('/');
+                        }}
+                        style={{
+                            background: 'linear-gradient(135deg, rgba(77, 171, 247, 0.3), rgba(102, 126, 234, 0.3))',
+                            border: '1px solid rgba(77, 171, 247, 0.4)',
+                            borderRadius: '8px',
+                            padding: '8px 12px',
+                            color: '#81D4FA',
+                            fontSize: '0.8rem',
+                            fontWeight: 600,
+                            cursor: 'pointer',
+                            transition: 'all 0.2s ease',
+                        }}
+                    >
+                        🎮 3D
+                    </button>
                     {/* Language Toggle */}
                     <button
                         onClick={() => setLanguage(language === 'ko' ? 'en' : 'ko')}
@@ -114,7 +144,7 @@ export default function MobilePage() {
                         🔊
                     </button>
                     <button
-                        onClick={() => router.push('/character-settings')}
+                        onClick={() => navigateWithTransition('/character-settings')}
                         style={{
                             background: 'rgba(255, 255, 255, 0.1)',
                             border: '1px solid rgba(255, 255, 255, 0.15)',
@@ -158,7 +188,7 @@ export default function MobilePage() {
                 ].map((item, i) => (
                     <button
                         key={i}
-                        onClick={() => router.push(item.href)}
+                        onClick={() => item.active ? null : navigateWithTransition(item.href)}
                         style={{
                             background: 'transparent',
                             border: 'none',

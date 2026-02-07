@@ -3,6 +3,7 @@
     "short_name": "Brookvale",
     "description": "A gamified productivity ecosystem for small daily joys.",
     "start_url": "/mobile",
+    "scope": "/",
     "display": "standalone",
     "background_color": "#0D1B3E",
     "theme_color": "#0D1B3E",
@@ -25,5 +26,40 @@
         "productivity",
         "lifestyle",
         "games"
+    ],
+    "shortcuts": [
+        {
+            "name": "Focus Cat",
+            "short_name": "Focus",
+            "url": "/focus-cat",
+            "icons": [
+                {
+                    "src": "/icon-192x192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "Daily Quest",
+            "short_name": "Quests",
+            "url": "/daily-quest",
+            "icons": [
+                {
+                    "src": "/icon-192x192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "Acorn Bank",
+            "short_name": "Bank",
+            "url": "/acorn-bank",
+            "icons": [
+                {
+                    "src": "/icon-192x192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        }
     ]
 }

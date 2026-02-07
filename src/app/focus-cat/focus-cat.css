@@ -2,13 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
 
 .focus-cat-app {
-    min-height: 100vh;
-    max-height: 100vh;
+    min-height: 100dvh;
+
     overflow-y: auto;
     background: linear-gradient(180deg, #fef6e4 0%, #f3d2c1 100%);
     font-family: 'Nunito', 'Nanum Gothic', sans-serif;
     padding: 1rem;
-    padding-bottom: 3rem;
+    padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
     position: relative;
 }
 

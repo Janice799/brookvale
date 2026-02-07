@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { PageTransitionProvider } from "@/components/PageTransition";
 
 export const metadata: Metadata = {
     title: "Brookvale - Living Pixel World",
@@ -36,7 +37,24 @@ export default function RootLayout({
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
             </head>
-            <body>{children}</body>
+            <body>
+                <PageTransitionProvider>
+                    {children}
+                </PageTransitionProvider>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            if ('serviceWorker' in navigator) {
+                                window.addEventListener('load', function() {
+                                    navigator.serviceWorker.register('/sw.js')
+                                        .then(function(reg) { console.log('SW registered:', reg.scope); })
+                                        .catch(function(err) { console.log('SW registration failed:', err); });
+                                });
+                            }
+                        `,
+                    }}
+                />
+            </body>
         </html>
     );
 }
