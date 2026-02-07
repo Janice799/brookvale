@@ -16,7 +16,7 @@ import { WeatherManager, WeatherControl } from '@/components/3d/WeatherSystem';
 import { Lake, Pond, WaterSurface } from '@/components/3d/WaterSystem';
 import { LoadingScreen, TouchJoystick, usePerformanceLevel, getQualitySettings, PerformanceIndicator } from '@/components/3d/PerformanceOptimization';
 import { IslandWorld, APP_ISLANDS, getCircularPosition } from '@/components/3d/AppIslands';
-import { WoodenBridge, WoodenBrookvaleLogo, generateBridgeConnections } from '@/components/3d/WorldElements';
+import { WoodenBridge, generateBridgeConnections } from '@/components/3d/WorldElements';
 import { PostProcessingEffects, PRESET_CINEMATIC } from '@/components/3d/PostProcessing';
 import { DioramaStorytelling } from '@/components/3d/DioramaStorytelling';
 import { usePageTransition } from '@/components/PageTransition';
@@ -2262,8 +2262,6 @@ function MiniWorldScene({
                 <WoodenBridge key={`bridge-${i}`} start={bridge.start} end={bridge.end} />
             ))}
 
-            {/* ===== 3D WOODEN BROOKVALE LOGO ===== */}
-            <WoodenBrookvaleLogo position={[0, 12, 0]} />
 
             {/* ========== ATMOSPHERIC ELEMENTS ========== */}
 
@@ -2342,8 +2340,6 @@ function MiniWorldScene({
                 />
             )}
 
-            {/* 3D Wooden Brookvale Logo - Higher position to avoid overlap */}
-            <WoodenLogo position={[0, 20, 0]} />
 
             {/* Camera follows player when moving */}
             <FollowCamera target={playerPosition} isMoving={isMoving} />
@@ -2761,6 +2757,7 @@ export default function BrookvaleWorld() {
             <Canvas
                 shadows={qualitySettings.shadowQuality !== 'none'}
                 camera={{ position: [0, 45, 50], fov: 50 }}
+                dpr={[1, 2]}
                 style={{ background: 'linear-gradient(180deg, #0D1B3E 0%, #1A2B5A 50%, #0F1E3A 100%)' }}
             >
                 <Suspense fallback={null}>
