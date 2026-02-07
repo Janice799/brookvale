@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { Language, defaultLanguage } from '@/lib/i18n';
 import { useAcornStore } from '@/lib/acorn-context';
 import { BackLink } from '@/components/BackLink';
+import { getAmbientSoundEngine, SoundType } from '@/lib/ambient-sounds';
 import './breath-bubble.css';
 
 // ==================== TYPES ====================
@@ -238,9 +239,26 @@ export default function BreathBubblePage() {
 
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
     const progressRef = useRef<NodeJS.Timeout | null>(null);
+    const soundEngineRef = useRef<ReturnType<typeof getAmbientSoundEngine> | null>(null);
 
     const { balance: totalAcorns, earn, isLoaded } = useAcornStore(language);
     const t = translations[language];
+
+    // Ambient sound engine
+    useEffect(() => {
+        soundEngineRef.current = getAmbientSoundEngine();
+        return () => {
+            soundEngineRef.current?.dispose();
+            soundEngineRef.current = null;
+        };
+    }, []);
+
+    // Play/stop ambient sound when selection changes
+    useEffect(() => {
+        if (soundEngineRef.current) {
+            soundEngineRef.current.play(ambientSound as SoundType);
+        }
+    }, [ambientSound]);
 
     // Load stats from localStorage
     useEffect(() => {
