@@ -17,7 +17,7 @@ import { Lake, Pond, WaterSurface } from '@/components/3d/WaterSystem';
 import { LoadingScreen, TouchJoystick, usePerformanceLevel, getQualitySettings, PerformanceIndicator } from '@/components/3d/PerformanceOptimization';
 import { IslandWorld, APP_ISLANDS, getCircularPosition } from '@/components/3d/AppIslands';
 import { WoodenBridge, generateBridgeConnections } from '@/components/3d/WorldElements';
-import { PostProcessingEffects, PRESET_CINEMATIC } from '@/components/3d/PostProcessing';
+import { PostProcessingEffects, PRESET_CLEAN } from '@/components/3d/PostProcessing';
 import { DioramaStorytelling } from '@/components/3d/DioramaStorytelling';
 import { usePageTransition } from '@/components/PageTransition';
 
@@ -2357,7 +2357,7 @@ function MiniWorldScene({
             {/* Creates the premium "miniature diorama" visual feel */}
             <PostProcessingEffects
                 performanceLevel={qualitySettings.animationDetail === 'full' ? 'high' : 'medium'}
-                {...PRESET_CINEMATIC}
+                {...PRESET_CLEAN}
             />
         </>
     );
