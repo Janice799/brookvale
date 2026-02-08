@@ -1,20 +1,18 @@
 /**
- * 🎵 Rhythm Surfer Music Engine
+ * 🎵 Rhythm Surfer Music Engine v2
  *
- * Procedurally generated music using Web Audio API.
- * Each song gets a unique melodic pattern, bass line, and percussion.
+ * Uses a lookahead scheduler to avoid overloading Web Audio API.
+ * Only schedules a few beats ahead at a time.
  */
 
-type NoteFrequency = number;
-
-// Musical scale frequencies (A minor pentatonic variants)
-const SCALES = {
-    'morning-dew': [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33], // C major
-    'ocean-waves': [246.94, 293.66, 329.63, 369.99, 440.00, 493.88, 587.33], // B minor
-    'forest-walk': [329.63, 369.99, 415.30, 493.88, 554.37, 659.25, 739.99], // E major
-    'starlight-dance': [293.66, 349.23, 392.00, 440.00, 523.25, 587.33, 659.25], // D mixolydian
-    'cosmic-beat': [220.00, 261.63, 293.66, 329.63, 392.00, 440.00, 523.25], // A minor
-    'neon-city': [233.08, 277.18, 311.13, 369.99, 415.30, 466.16, 554.37], // Bb minor
+// Musical scales per song
+const SCALES: Record<string, number[]> = {
+    'morning-dew': [261.63, 293.66, 329.63, 392.00, 440.00, 523.25],
+    'ocean-waves': [246.94, 293.66, 329.63, 369.99, 440.00, 493.88],
+    'forest-walk': [329.63, 369.99, 415.30, 493.88, 554.37, 659.25],
+    'starlight-dance': [293.66, 349.23, 392.00, 440.00, 523.25, 587.33],
+    'cosmic-beat': [220.00, 261.63, 293.66, 329.63, 392.00, 440.00],
+    'neon-city': [233.08, 277.18, 311.13, 369.99, 415.30, 466.16],
 };
 
 const BASS_NOTES: Record<string, number[]> = {
@@ -29,16 +27,20 @@ const BASS_NOTES: Record<string, number[]> = {
 class RhythmMusicEngine {
     private audioCtx: AudioContext | null = null;
     private masterGain: GainNode | null = null;
-    private activeNodes: (AudioNode | AudioBufferSourceNode | OscillatorNode)[] = [];
-    private scheduledTimeouts: number[] = [];
     private isPlaying = false;
-    private currentSongId = '';
+    private schedulerTimer: ReturnType<typeof setInterval> | null = null;
+    private currentBeat = 0;
+    private nextBeatTime = 0;
+    private beatDuration = 0;
+    private totalBeats = 0;
+    private songId = '';
+    private bpm = 120;
 
     private getContext(): AudioContext {
-        if (!this.audioCtx) {
+        if (!this.audioCtx || this.audioCtx.state === 'closed') {
             this.audioCtx = new AudioContext();
             this.masterGain = this.audioCtx.createGain();
-            this.masterGain.gain.value = 0;
+            this.masterGain.gain.value = 0.7;
             this.masterGain.connect(this.audioCtx.destination);
         }
         if (this.audioCtx.state === 'suspended') {
@@ -47,176 +49,177 @@ class RhythmMusicEngine {
         return this.audioCtx;
     }
 
-    /** Create a soft synth tone */
-    private createTone(
-        ctx: AudioContext,
-        freq: NoteFrequency,
-        startTime: number,
+    /** Play a note with envelope */
+    private playNote(
+        freq: number,
+        time: number,
         duration: number,
-        volume: number = 0.12,
+        volume: number,
         type: OscillatorType = 'sine'
     ): void {
+        const ctx = this.audioCtx!;
         const osc = ctx.createOscillator();
         osc.type = type;
         osc.frequency.value = freq;
 
         const gain = ctx.createGain();
-        gain.gain.setValueAtTime(0, startTime);
-        gain.gain.linearRampToValueAtTime(volume, startTime + 0.02);
-        gain.gain.setValueAtTime(volume, startTime + duration * 0.7);
-        gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+        const attack = Math.min(0.03, duration * 0.1);
+        gain.gain.setValueAtTime(0, time);
+        gain.gain.linearRampToValueAtTime(volume, time + attack);
+        gain.gain.setValueAtTime(volume, time + duration * 0.6);
+        gain.gain.linearRampToValueAtTime(0, time + duration);
 
         osc.connect(gain);
         gain.connect(this.masterGain!);
-        osc.start(startTime);
-        osc.stop(startTime + duration + 0.05);
-
-        this.activeNodes.push(osc, gain);
+        osc.start(time);
+        osc.stop(time + duration + 0.01);
     }
 
-    /** Create a pad chord (warm sustained chord) */
-    private createPad(
-        ctx: AudioContext,
-        frequencies: number[],
-        startTime: number,
-        duration: number,
-        volume: number = 0.04
-    ): void {
-        frequencies.forEach(freq => {
-            const osc = ctx.createOscillator();
-            osc.type = 'sine';
-            osc.frequency.value = freq;
+    /** Play kick drum */
+    private playKick(time: number, volume: number = 0.25): void {
+        const ctx = this.audioCtx!;
+        const osc = ctx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(150, time);
+        osc.frequency.exponentialRampToValueAtTime(40, time + 0.12);
 
-            // Add gentle vibrato
-            const vibrato = ctx.createOscillator();
-            vibrato.type = 'sine';
-            vibrato.frequency.value = 4 + Math.random() * 2;
-            const vibratoGain = ctx.createGain();
-            vibratoGain.gain.value = freq * 0.003;
-            vibrato.connect(vibratoGain);
-            vibratoGain.connect(osc.frequency);
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(volume, time);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.25);
 
-            const gain = ctx.createGain();
-            gain.gain.setValueAtTime(0, startTime);
-            gain.gain.linearRampToValueAtTime(volume, startTime + 0.3);
-            gain.gain.setValueAtTime(volume, startTime + duration * 0.8);
-            gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
-
-            osc.connect(gain);
-            gain.connect(this.masterGain!);
-            osc.start(startTime);
-            osc.stop(startTime + duration + 0.1);
-            vibrato.start(startTime);
-            vibrato.stop(startTime + duration + 0.1);
-
-            this.activeNodes.push(osc, gain, vibrato, vibratoGain);
-        });
+        osc.connect(gain);
+        gain.connect(this.masterGain!);
+        osc.start(time);
+        osc.stop(time + 0.3);
     }
 
-    /** Create percussion hit (kick / snare / hi-hat) */
-    private createPercussion(
-        ctx: AudioContext,
-        type: 'kick' | 'snare' | 'hihat',
-        startTime: number,
-        volume: number = 0.15
-    ): void {
-        if (type === 'kick') {
-            const osc = ctx.createOscillator();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(150, startTime);
-            osc.frequency.exponentialRampToValueAtTime(50, startTime + 0.1);
+    /** Play snare */
+    private playSnare(time: number, volume: number = 0.12): void {
+        const ctx = this.audioCtx!;
+        const len = ctx.sampleRate * 0.1;
+        const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+        const d = buf.getChannelData(0);
+        for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len);
 
-            const gain = ctx.createGain();
-            gain.gain.setValueAtTime(volume, startTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.3);
+        const src = ctx.createBufferSource();
+        src.buffer = buf;
 
-            osc.connect(gain);
-            gain.connect(this.masterGain!);
-            osc.start(startTime);
-            osc.stop(startTime + 0.35);
+        const hp = ctx.createBiquadFilter();
+        hp.type = 'highpass';
+        hp.frequency.value = 2000;
 
-            this.activeNodes.push(osc, gain);
-        } else if (type === 'snare') {
-            // Noise burst
-            const bufferSize = ctx.sampleRate * 0.15;
-            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-            const data = buffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-                data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(volume, time);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.1);
+
+        src.connect(hp);
+        hp.connect(gain);
+        gain.connect(this.masterGain!);
+        src.start(time);
+    }
+
+    /** Play hi-hat */
+    private playHiHat(time: number, volume: number = 0.06): void {
+        const ctx = this.audioCtx!;
+        const len = ctx.sampleRate * 0.03;
+        const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+        const d = buf.getChannelData(0);
+        for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len);
+
+        const src = ctx.createBufferSource();
+        src.buffer = buf;
+
+        const hp = ctx.createBiquadFilter();
+        hp.type = 'highpass';
+        hp.frequency.value = 7000;
+
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(volume, time);
+        gain.gain.exponentialRampToValueAtTime(0.001, time + 0.03);
+
+        src.connect(hp);
+        hp.connect(gain);
+        gain.connect(this.masterGain!);
+        src.start(time);
+    }
+
+    /** Schedule a single beat's worth of music */
+    private scheduleBeat(beat: number, time: number): void {
+        const scale = SCALES[this.songId] || SCALES['morning-dew'];
+        const bass = BASS_NOTES[this.songId] || BASS_NOTES['morning-dew'];
+        const bd = this.beatDuration;
+
+        // === DRUMS ===
+        // Kick on 1, 3
+        if (beat % 4 === 0 || beat % 4 === 2) {
+            this.playKick(time);
+        }
+        // Snare on 2, 4
+        if (beat % 4 === 1 || beat % 4 === 3) {
+            this.playSnare(time);
+        }
+        // Hi-hat every beat
+        this.playHiHat(time);
+        // Offbeat hi-hat for fast songs
+        if (this.bpm >= 120) {
+            this.playHiHat(time + bd * 0.5, 0.03);
+        }
+
+        // === BASS (every 2 beats) ===
+        if (beat % 2 === 0) {
+            const bassNote = bass[Math.floor(beat / 4) % bass.length];
+            this.playNote(bassNote, time, bd * 1.8, 0.15, 'triangle');
+        }
+
+        // === MELODY (every beat, alternating) ===
+        const noteIdx = (beat * 3 + Math.floor(beat / 4) * 2) % scale.length;
+        if (beat % 2 === 0) {
+            this.playNote(scale[noteIdx], time, bd * 1.2, 0.1, 'sine');
+        } else {
+            // Lighter passing note on odd beats
+            this.playNote(scale[(noteIdx + 2) % scale.length], time, bd * 0.6, 0.05, 'sine');
+        }
+
+        // === HARMONY (every 4 beats) ===
+        if (beat % 4 === 0) {
+            const root = scale[0] * 0.5;
+            const fifth = scale[4] * 0.5;
+            this.playNote(root, time, bd * 3.5, 0.04, 'sine');
+            this.playNote(fifth, time, bd * 3.5, 0.03, 'sine');
+        }
+
+        // === ARPEGGIO for fast songs ===
+        if (this.bpm >= 120 && beat % 4 === 0) {
+            for (let i = 0; i < 3; i++) {
+                const arpNote = scale[(i * 2) % scale.length] * 2;
+                this.playNote(arpNote, time + i * bd * 0.33, bd * 0.25, 0.04, 'sine');
             }
-            const noise = ctx.createBufferSource();
-            noise.buffer = buffer;
+        }
 
-            const filter = ctx.createBiquadFilter();
-            filter.type = 'highpass';
-            filter.frequency.value = 2000;
-
-            const gain = ctx.createGain();
-            gain.gain.setValueAtTime(volume * 0.5, startTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.15);
-
-            noise.connect(filter);
-            filter.connect(gain);
-            gain.connect(this.masterGain!);
-            noise.start(startTime);
-
-            this.activeNodes.push(noise, filter, gain);
-        } else if (type === 'hihat') {
-            const bufferSize = ctx.sampleRate * 0.05;
-            const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-            const data = buffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-                data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
-            }
-            const noise = ctx.createBufferSource();
-            noise.buffer = buffer;
-
-            const filter = ctx.createBiquadFilter();
-            filter.type = 'highpass';
-            filter.frequency.value = 8000;
-
-            const gain = ctx.createGain();
-            gain.gain.setValueAtTime(volume * 0.2, startTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.05);
-
-            noise.connect(filter);
-            filter.connect(gain);
-            gain.connect(this.masterGain!);
-            noise.start(startTime);
-
-            this.activeNodes.push(noise, filter, gain);
+        // === FILL every 16 beats ===
+        if (beat > 0 && beat % 16 === 15) {
+            this.playSnare(time + bd * 0.25, 0.1);
+            this.playSnare(time + bd * 0.5, 0.12);
+            this.playSnare(time + bd * 0.75, 0.14);
         }
     }
 
-    /** Create bass line */
-    private createBass(
-        ctx: AudioContext,
-        freq: number,
-        startTime: number,
-        duration: number,
-        volume: number = 0.1
-    ): void {
-        const osc = ctx.createOscillator();
-        osc.type = 'triangle';
-        osc.frequency.value = freq;
+    /** Lookahead scheduler - called every 25ms, schedules ~100ms ahead */
+    private scheduler(): void {
+        const ctx = this.audioCtx;
+        if (!ctx || !this.isPlaying) return;
 
-        const filter = ctx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.value = 300;
+        const lookahead = 0.1; // Schedule 100ms ahead
 
-        const gain = ctx.createGain();
-        gain.gain.setValueAtTime(0, startTime);
-        gain.gain.linearRampToValueAtTime(volume, startTime + 0.02);
-        gain.gain.setValueAtTime(volume, startTime + duration * 0.6);
-        gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
-
-        osc.connect(filter);
-        filter.connect(gain);
-        gain.connect(this.masterGain!);
-        osc.start(startTime);
-        osc.stop(startTime + duration + 0.05);
-
-        this.activeNodes.push(osc, filter, gain);
+        while (this.nextBeatTime < ctx.currentTime + lookahead) {
+            if (this.currentBeat >= this.totalBeats) {
+                this.stop();
+                return;
+            }
+            this.scheduleBeat(this.currentBeat, this.nextBeatTime);
+            this.nextBeatTime += this.beatDuration;
+            this.currentBeat++;
+        }
     }
 
     /** Play a beat click sound (for tap feedback) */
@@ -230,7 +233,7 @@ class RhythmMusicEngine {
         osc.frequency.exponentialRampToValueAtTime(440, now + 0.05);
 
         const gain = ctx.createGain();
-        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.setValueAtTime(0.3, now);
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
 
         osc.connect(gain);
@@ -239,153 +242,57 @@ class RhythmMusicEngine {
         osc.stop(now + 0.1);
     }
 
-    /** Schedule a full song */
+    /** Start playing a song */
     play(songId: string, bpm: number, duration: number): void {
         this.stop();
 
         const ctx = this.getContext();
         this.isPlaying = true;
-        this.currentSongId = songId;
+        this.songId = songId;
+        this.bpm = bpm;
+        this.beatDuration = 60 / bpm;
+        this.totalBeats = Math.ceil(duration / this.beatDuration);
+        this.currentBeat = 0;
+        this.nextBeatTime = ctx.currentTime + 0.05;
 
-        const scale = SCALES[songId as keyof typeof SCALES] || SCALES['morning-dew'];
-        const bassNotes = BASS_NOTES[songId as keyof typeof BASS_NOTES] || BASS_NOTES['morning-dew'];
-        const beatDuration = 60 / bpm;
-        const totalBeats = Math.ceil(duration / beatDuration);
-        const startTime = ctx.currentTime + 0.1;
-
-        // Fade in master
+        // Set master volume
         if (this.masterGain) {
-            this.masterGain.gain.setValueAtTime(0, startTime);
-            this.masterGain.gain.linearRampToValueAtTime(0.8, startTime + 1.5);
+            this.masterGain.gain.setValueAtTime(0.7, ctx.currentTime);
         }
 
-        // Schedule all the music
-        for (let beat = 0; beat < totalBeats; beat++) {
-            const t = startTime + beat * beatDuration;
-
-            // --- PERCUSSION ---
-            // Kick on beats 1, 3
-            if (beat % 4 === 0 || beat % 4 === 2) {
-                this.createPercussion(ctx, 'kick', t, 0.15);
-            }
-            // Snare on beats 2, 4
-            if (beat % 4 === 1 || beat % 4 === 3) {
-                this.createPercussion(ctx, 'snare', t, 0.1);
-            }
-            // Hi-hat on every beat (and offbeats for faster songs)
-            this.createPercussion(ctx, 'hihat', t, 0.08);
-            if (bpm >= 120) {
-                this.createPercussion(ctx, 'hihat', t + beatDuration * 0.5, 0.05);
-            }
-
-            // --- BASS ---
-            if (beat % 4 === 0) {
-                const bassNote = bassNotes[Math.floor(beat / 4) % bassNotes.length];
-                this.createBass(ctx, bassNote, t, beatDuration * 2, 0.1);
-            }
-
-            // --- MELODY ---
-            if (beat % 2 === 0) {
-                // Main melody note
-                const noteIdx = (beat * 3 + Math.floor(beat / 4) * 2) % scale.length;
-                this.createTone(ctx, scale[noteIdx], t, beatDuration * 1.5, 0.08, 'sine');
-
-                // Harmony (5th above, quieter)
-                if (beat % 4 === 0) {
-                    const harmIdx = (noteIdx + 4) % scale.length;
-                    this.createTone(ctx, scale[harmIdx], t + beatDuration * 0.5, beatDuration, 0.04, 'triangle');
-                }
-            }
-
-            // --- PAD CHORDS (every 4 beats) ---
-            if (beat % 8 === 0) {
-                const root = scale[0];
-                const third = scale[2];
-                const fifth = scale[4];
-                this.createPad(ctx, [root * 0.5, third * 0.5, fifth * 0.5], t, beatDuration * 8, 0.03);
-            }
-
-            // --- ARPEGGIOS (for faster songs) ---
-            if (bpm >= 120 && beat % 4 === 0) {
-                for (let i = 0; i < 4; i++) {
-                    const arpNote = scale[(i * 2) % scale.length];
-                    this.createTone(
-                        ctx,
-                        arpNote * 2, // Octave up
-                        t + i * beatDuration * 0.25,
-                        beatDuration * 0.2,
-                        0.03,
-                        'sine'
-                    );
-                }
-            }
-
-            // --- FILLS (every 16 beats) ---
-            if (beat > 0 && beat % 16 === 15) {
-                for (let i = 0; i < 4; i++) {
-                    this.createPercussion(ctx, 'snare', t + i * beatDuration * 0.25, 0.12);
-                }
-            }
-        }
-
-        // Schedule fade out near the end
-        if (this.masterGain) {
-            const fadeStart = startTime + (totalBeats - 4) * beatDuration;
-            this.masterGain.gain.setValueAtTime(0.8, fadeStart);
-            this.masterGain.gain.linearRampToValueAtTime(0, fadeStart + 4 * beatDuration);
-        }
+        // Start scheduler loop (runs every 25ms)
+        this.schedulerTimer = setInterval(() => this.scheduler(), 25);
     }
 
     /** Stop all music */
     stop(): void {
         this.isPlaying = false;
-        this.currentSongId = '';
 
-        // Fade out quickly
+        if (this.schedulerTimer) {
+            clearInterval(this.schedulerTimer);
+            this.schedulerTimer = null;
+        }
+
+        // Quick fade out
         if (this.masterGain && this.audioCtx) {
             const now = this.audioCtx.currentTime;
             this.masterGain.gain.setValueAtTime(this.masterGain.gain.value, now);
-            this.masterGain.gain.linearRampToValueAtTime(0, now + 0.3);
+            this.masterGain.gain.linearRampToValueAtTime(0, now + 0.2);
+            // Restore volume after fade for next play
+            this.masterGain.gain.setValueAtTime(0.7, now + 0.25);
         }
-
-        // Clear scheduled timeouts
-        this.scheduledTimeouts.forEach(id => clearTimeout(id));
-        this.scheduledTimeouts = [];
-
-        // Stop and disconnect after fade
-        setTimeout(() => {
-            this.activeNodes.forEach(node => {
-                try {
-                    if (node instanceof AudioBufferSourceNode || node instanceof OscillatorNode) {
-                        node.stop();
-                    }
-                    node.disconnect();
-                } catch {
-                    // Already stopped/disconnected
-                }
-            });
-            this.activeNodes = [];
-        }, 400);
     }
 
     /** Clean up everything */
     dispose(): void {
         this.stop();
         setTimeout(() => {
-            if (this.audioCtx) {
+            if (this.audioCtx && this.audioCtx.state !== 'closed') {
                 this.audioCtx.close();
-                this.audioCtx = null;
-                this.masterGain = null;
             }
-        }, 500);
-    }
-
-    getIsPlaying(): boolean {
-        return this.isPlaying;
-    }
-
-    getCurrentSong(): string {
-        return this.currentSongId;
+            this.audioCtx = null;
+            this.masterGain = null;
+        }, 300);
     }
 }
 
