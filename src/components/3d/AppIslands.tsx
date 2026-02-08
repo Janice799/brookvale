@@ -836,70 +836,114 @@ function AppBuilding({ appId, theme, hovered }: AppBuildingProps) {
             );
 
         case 'mind-cloud':
-            // Zen torii gate + architectural details
+            // Korean 한옥 서재 (Hanok Study Room)
             return (
                 <group>
-                    {/* Torii posts with bases */}
-                    <mesh position={[-0.8, 0.1, 0]}>
-                        <boxGeometry args={[0.25, 0.2, 0.25]} />
-                        <meshStandardMaterial color="#424242" roughness={0.9} />
+                    {/* 주춧돌 Stone foundation base */}
+                    <mesh position={[0, 0.12, 0]} castShadow>
+                        <boxGeometry args={[2.6, 0.25, 2.0]} />
+                        <meshStandardMaterial color="#9E9E9E" roughness={0.95} />
                     </mesh>
-                    <mesh position={[-0.8, 1, 0]} castShadow>
-                        <cylinderGeometry args={[0.12, 0.15, 2, 8]} />
-                        <meshStandardMaterial color="#E53935" roughness={0.9} emissive={emissive} emissiveIntensity={emissiveIntensity} />
+                    {/* 마루 Wooden floor (maru) */}
+                    <mesh position={[0, 0.28, 0]}>
+                        <boxGeometry args={[2.4, 0.08, 1.8]} />
+                        <meshStandardMaterial color="#D7A86E" roughness={0.85} emissive={emissive} emissiveIntensity={emissiveIntensity} />
                     </mesh>
-                    <mesh position={[0.8, 0.1, 0]}>
-                        <boxGeometry args={[0.25, 0.2, 0.25]} />
-                        <meshStandardMaterial color="#424242" roughness={0.9} />
+                    {/* 기둥 Four wooden pillars */}
+                    <mesh position={[-0.95, 0.95, -0.7]} castShadow>
+                        <cylinderGeometry args={[0.08, 0.1, 1.3, 8]} />
+                        <meshStandardMaterial color="#8D6E63" roughness={0.9} />
                     </mesh>
-                    <mesh position={[0.8, 1, 0]} castShadow>
-                        <cylinderGeometry args={[0.12, 0.15, 2, 8]} />
-                        <meshStandardMaterial color="#E53935" roughness={0.9} />
+                    <mesh position={[0.95, 0.95, -0.7]} castShadow>
+                        <cylinderGeometry args={[0.08, 0.1, 1.3, 8]} />
+                        <meshStandardMaterial color="#8D6E63" roughness={0.9} />
                     </mesh>
-                    {/* Top beams (kasagi and nuki) */}
-                    <mesh position={[0, 2.1, 0]} castShadow>
-                        <boxGeometry args={[2.4, 0.15, 0.3]} />
-                        <meshStandardMaterial color="#B71C1C" roughness={0.9} />
+                    <mesh position={[-0.95, 0.95, 0.7]} castShadow>
+                        <cylinderGeometry args={[0.08, 0.1, 1.3, 8]} />
+                        <meshStandardMaterial color="#8D6E63" roughness={0.9} />
                     </mesh>
-                    <mesh position={[0, 2, 0]} castShadow>
-                        <boxGeometry args={[2.2, 0.2, 0.25]} />
-                        <meshStandardMaterial color="#C62828" roughness={0.9} />
+                    <mesh position={[0.95, 0.95, 0.7]} castShadow>
+                        <cylinderGeometry args={[0.08, 0.1, 1.3, 8]} />
+                        <meshStandardMaterial color="#8D6E63" roughness={0.9} />
                     </mesh>
-                    {/* Secondary horizontal beam */}
-                    <mesh position={[0, 1.5, 0]}>
-                        <boxGeometry args={[1.4, 0.1, 0.12]} />
-                        <meshStandardMaterial color="#D32F2F" />
+                    {/* 처마 Eaves beam */}
+                    <mesh position={[0, 1.62, 0]}>
+                        <boxGeometry args={[2.8, 0.08, 2.2]} />
+                        <meshStandardMaterial color="#6D4C41" roughness={0.9} />
                     </mesh>
-                    {/* Cherry blossom tree */}
-                    <mesh position={[1.5, 0.6, 0.3]}>
-                        <cylinderGeometry args={[0.1, 0.12, 1.2, 8]} />
-                        <meshStandardMaterial color="#5D4037" />
+                    {/* 기와지붕 Curved giwa roof - main body */}
+                    <mesh position={[0, 1.95, 0]} castShadow>
+                        <boxGeometry args={[3.0, 0.12, 2.4]} />
+                        <meshStandardMaterial color="#455A64" roughness={0.85} />
                     </mesh>
-                    <mesh position={[1.5, 1.4, 0.3]}>
-                        <sphereGeometry args={[0.55, 8, 8]} />
-                        <meshStandardMaterial color="#F8BBD9" roughness={0.9} />
+                    {/* 지붕 곡선 Roof curve top */}
+                    <mesh position={[0, 2.08, 0]}>
+                        <cylinderGeometry args={[0.15, 1.5, 0.35, 4]} />
+                        <meshStandardMaterial color="#37474F" roughness={0.85} />
                     </mesh>
-                    {/* Smaller blossom cluster */}
-                    <mesh position={[1.8, 1.2, 0]}>
-                        <sphereGeometry args={[0.3, 8, 8]} />
-                        <meshStandardMaterial color="#FCE4EC" roughness={0.9} />
+                    {/* 용마루 Ridge line */}
+                    <mesh position={[0, 2.28, 0]}>
+                        <boxGeometry args={[2.6, 0.1, 0.15]} />
+                        <meshStandardMaterial color="#37474F" roughness={0.9} />
                     </mesh>
-                    {/* Stone path */}
-                    <mesh position={[0, 0.02, 0.8]} rotation={[-Math.PI / 2, 0, 0]}>
-                        <circleGeometry args={[0.2, 8]} />
-                        <meshStandardMaterial color="#9E9E9E" roughness={1} />
+                    {/* 지붕 끝 장식 Roof end ornaments */}
+                    <mesh position={[-1.35, 2.28, 0]}>
+                        <sphereGeometry args={[0.08, 8, 8]} />
+                        <meshStandardMaterial color="#546E7A" />
                     </mesh>
-                    <mesh position={[0, 0.02, 1.3]} rotation={[-Math.PI / 2, 0, 0.2]}>
-                        <circleGeometry args={[0.22, 8]} />
+                    <mesh position={[1.35, 2.28, 0]}>
+                        <sphereGeometry args={[0.08, 8, 8]} />
+                        <meshStandardMaterial color="#546E7A" />
+                    </mesh>
+                    {/* 한지 문 Hanji sliding door (front) */}
+                    <mesh position={[-0.35, 0.88, 0.71]}>
+                        <boxGeometry args={[0.5, 0.95, 0.04]} />
+                        <meshStandardMaterial color="#FFF8E1" roughness={0.95} />
+                    </mesh>
+                    <mesh position={[0.35, 0.88, 0.71]}>
+                        <boxGeometry args={[0.5, 0.95, 0.04]} />
+                        <meshStandardMaterial color="#FFFDE7" roughness={0.95} />
+                    </mesh>
+                    {/* 문살 Door frame grid lines */}
+                    <mesh position={[-0.35, 0.88, 0.735]}>
+                        <boxGeometry args={[0.48, 0.02, 0.01]} />
+                        <meshStandardMaterial color="#A1887F" />
+                    </mesh>
+                    <mesh position={[-0.35, 1.1, 0.735]}>
+                        <boxGeometry args={[0.48, 0.02, 0.01]} />
+                        <meshStandardMaterial color="#A1887F" />
+                    </mesh>
+                    <mesh position={[-0.35, 0.88, 0.735]}>
+                        <boxGeometry args={[0.02, 0.93, 0.01]} />
+                        <meshStandardMaterial color="#A1887F" />
+                    </mesh>
+                    {/* 뒷벽 Back wall */}
+                    <mesh position={[0, 0.88, -0.72]}>
+                        <boxGeometry args={[1.9, 1.0, 0.06]} />
+                        <meshStandardMaterial color="#EFEBE9" roughness={0.95} />
+                    </mesh>
+                    {/* 작은 창 Small round window on back wall */}
+                    <RoundWindow position={[0, 1.05, -0.74]} radius={0.18} glowing={true} frameColor="#6D4C41" glassColor="#FFF8E1" />
+                    {/* 디딤돌 Stepping stones */}
+                    <mesh position={[0, 0.02, 1.1]} rotation={[-Math.PI / 2, 0, 0]}>
+                        <circleGeometry args={[0.18, 8]} />
                         <meshStandardMaterial color="#BDBDBD" roughness={1} />
                     </mesh>
-                    {/* Paper lantern */}
-                    <mesh position={[-1.4, 1.0, 0.3]}>
-                        <capsuleGeometry args={[0.12, 0.2, 4, 8]} />
-                        <meshStandardMaterial color="#FFF8E1" emissive="#FFCC00" emissiveIntensity={0.3} />
+                    <mesh position={[0.15, 0.02, 1.55]} rotation={[-Math.PI / 2, 0, 0.3]}>
+                        <circleGeometry args={[0.16, 8]} />
+                        <meshStandardMaterial color="#9E9E9E" roughness={1} />
                     </mesh>
-                    {/* Zen sign */}
-                    <HangingSign position={[0, 2.4, 0]} text="☁️" backgroundColor="#C62828" />
+                    {/* 장독대 Earthenware jar */}
+                    <mesh position={[-1.5, 0.35, 0.3]}>
+                        <cylinderGeometry args={[0.12, 0.15, 0.35, 8]} />
+                        <meshStandardMaterial color="#8D6E63" roughness={0.95} />
+                    </mesh>
+                    <mesh position={[-1.5, 0.55, 0.3]}>
+                        <cylinderGeometry args={[0.14, 0.1, 0.08, 8]} />
+                        <meshStandardMaterial color="#6D4C41" roughness={0.95} />
+                    </mesh>
+                    {/* Mind Cloud sign */}
+                    <Signboard position={[0, 1.7, 0.85]} text="☁️ 서재" backgroundColor="#5D4037" textColor="#FFF8E1" size={[0.9, 0.22, 0.05]} />
                 </group>
             );
 
@@ -1217,12 +1261,13 @@ function IslandDecorations({ appId }: { appId: string }) {
                 </group>
             );
         case 'mind-cloud':
-            // Torii gate - zen with cherry blossom petals
+            // 한옥 서재 - Korean pine and autumn leaves
             return (
                 <group position={[0, 0.75, 0]}>
-                    <IslandTree position={[-3, 0, -2]} treeType="cherry" scale={0.9} />
-                    <IslandTree position={[3, 0, -2]} treeType="cherry" scale={0.7} />
-                    <FloatingLeaves position={[0, 2.5, 0]} count={10} color="#F8BBD9" />
+                    <IslandTree position={[-3, 0, -2]} treeType="pine" scale={0.9} />
+                    <IslandTree position={[3, 0, -2]} treeType="round" scale={0.7} />
+                    <RockCluster position={[3, 0, 2]} scale={0.6} />
+                    <FloatingLeaves position={[0, 2.5, 0]} count={6} color="#FFAB40" />
                 </group>
             );
         case 'sleep-nest':
