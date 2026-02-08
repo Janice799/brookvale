@@ -548,7 +548,36 @@ export default function RhythmSurferPage() {
 
             {/* Header */}
             <header className="app-header">
-                <BackLink>{t.back}</BackLink>
+                {selectedSong ? (
+                    <button
+                        className="back-link"
+                        onClick={() => {
+                            if (musicEngineRef.current) musicEngineRef.current.stop();
+                            if (intervalRef.current) clearTimeout(intervalRef.current);
+                            if (timerRef.current) clearInterval(timerRef.current);
+                            stopEQ();
+                            setIsPlaying(false);
+                            setShowResult(false);
+                            setSelectedSong(null);
+                            setBeatVisible(false);
+                            setFeedback(null);
+                            setPulseIntensity(0);
+                        }}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            font: 'inherit',
+                            color: 'inherit',
+                            padding: 0,
+                            textAlign: 'left',
+                        }}
+                    >
+                        {language === 'ko' ? '← 곡 선택' : '← Songs'}
+                    </button>
+                ) : (
+                    <BackLink>{t.back}</BackLink>
+                )}
                 <h1>🎵 {t.title}</h1>
                 <div className="header-right">
                     <button
