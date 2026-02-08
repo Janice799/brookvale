@@ -253,12 +253,13 @@ export default function BreathBubblePage() {
         };
     }, []);
 
-    // Play/stop ambient sound when selection changes
-    useEffect(() => {
+    // Play ambient sound directly (must be called from click handler for mobile)
+    const handleSoundSelect = useCallback((soundId: string) => {
+        setAmbientSound(soundId);
         if (soundEngineRef.current) {
-            soundEngineRef.current.play(ambientSound as SoundType);
+            soundEngineRef.current.play(soundId as SoundType);
         }
-    }, [ambientSound]);
+    }, []);
 
     // Load stats from localStorage
     useEffect(() => {
@@ -497,7 +498,7 @@ export default function BreathBubblePage() {
                         <button
                             key={sound.id}
                             className={`sound-btn ${ambientSound === sound.id ? 'active' : ''}`}
-                            onClick={() => setAmbientSound(sound.id)}
+                            onClick={() => handleSoundSelect(sound.id)}
                         >
                             {sound.emoji}
                         </button>
