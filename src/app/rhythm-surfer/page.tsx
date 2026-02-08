@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { Language, defaultLanguage } from '@/lib/i18n';
 import { useAcornStore } from '@/lib/acorn-context';
 import { BackLink } from '@/components/BackLink';
+import { getRhythmMusicEngine } from '@/lib/rhythm-music';
 import './rhythm-surfer.css';
 
 interface Song {
@@ -236,6 +237,7 @@ export default function RhythmSurferPage() {
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
     const timerRef = useRef<NodeJS.Timeout | null>(null);
     const eqIntervalRef = useRef<NodeJS.Timeout | null>(null);
+    const musicEngineRef = useRef<ReturnType<typeof getRhythmMusicEngine> | null>(null);
 
     // Use global acorn system
     const { balance: totalAcorns, earn: earnAcorns } = useAcornStore(language);
@@ -263,6 +265,15 @@ export default function RhythmSurferPage() {
     useEffect(() => {
         localStorage.setItem('rhythmSurferData', JSON.stringify({ sessions }));
     }, [sessions]);
+
+    // Initialize music engine
+    useEffect(() => {
+        musicEngineRef.current = getRhythmMusicEngine();
+        return () => {
+            musicEngineRef.current?.dispose();
+            musicEngineRef.current = null;
+        };
+    }, []);
 
     // Clean up intervals
     useEffect(() => {
@@ -327,6 +338,11 @@ export default function RhythmSurferPage() {
         patternIndexRef.current = 0;
         startEQ();
 
+        // Start music!
+        if (musicEngineRef.current) {
+            musicEngineRef.current.play(selectedSong.id, selectedSong.bpm, selectedSong.duration);
+        }
+
         // Timer countdown
         timerRef.current = setInterval(() => {
             setTimeLeft(prev => {
@@ -376,6 +392,11 @@ export default function RhythmSurferPage() {
 
         const timeDiff = Date.now() - beatTimeRef.current;
         beatTimeRef.current = 0;
+
+        // Play tap click sound
+        if (musicEngineRef.current) {
+            musicEngineRef.current.playBeatClick();
+        }
         setBeatVisible(false);
 
         if (timeDiff < 150) {
@@ -421,6 +442,11 @@ export default function RhythmSurferPage() {
         if (timerRef.current) clearInterval(timerRef.current);
         stopEQ();
 
+        // Stop music
+        if (musicEngineRef.current) {
+            musicEngineRef.current.stop();
+        }
+
         setIsPlaying(false);
         setShowResult(true);
 
@@ -465,6 +491,9 @@ export default function RhythmSurferPage() {
         setBeatVisible(false);
         setFeedback(null);
         setPulseIntensity(0);
+        if (musicEngineRef.current) {
+            musicEngineRef.current.stop();
+        }
     };
 
     // Get high score
