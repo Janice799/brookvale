@@ -12,7 +12,7 @@ import { playUISound, startZoneAmbient, initializeAudio } from '@/lib/soundManag
 import type { ZoneAmbient } from '@/lib/soundManager';
 import { DynamicLighting, DynamicSky } from '@/components/3d/DynamicLighting';
 import { ParticleEffectManager, triggerParticleEffect } from '@/components/3d/ParticleEffects';
-import { WeatherManager, WeatherControl } from '@/components/3d/WeatherSystem';
+import { WeatherManager, setWeather, type WeatherType } from '@/components/3d/WeatherSystem';
 import { Lake, Pond, WaterSurface } from '@/components/3d/WaterSystem';
 import { LoadingScreen, TouchJoystick, usePerformanceLevel, getQualitySettings, PerformanceIndicator } from '@/components/3d/PerformanceOptimization';
 import { IslandWorld, APP_ISLANDS, getCircularPosition } from '@/components/3d/AppIslands';
@@ -2212,6 +2212,7 @@ function MiniWorldScene({
     keys,
     isMoving,
     qualitySettings,
+    activeWeather,
 }: {
     onLandmarkClick: (landmark: typeof landmarks[0]) => void,
     selectedLandmark: typeof landmarks[0] | null,
@@ -2223,6 +2224,7 @@ function MiniWorldScene({
     keys: ReturnType<typeof useKeyboard>,
     isMoving: boolean,
     qualitySettings: ReturnType<typeof getQualitySettings>,
+    activeWeather: WeatherType,
 }) {
     const forestBuildings = landmarks.filter(l => l.zone === 'forest');
     const townBuildings = landmarks.filter(l => l.zone === 'town');
@@ -2235,9 +2237,12 @@ function MiniWorldScene({
             {/* Fixed Bright Lighting for MINI WORLD style */}
             <DynamicLighting mode="fixed" fixedTime="noon" />
 
-            {/* MINI WORLD: Dark Navy Background - No Sky, No Weather */}
+            {/* MINI WORLD: Dark Navy Background */}
             <color attach="background" args={['#0D1B3E']} />
             <fog attach="fog" args={['#0D1B3E', 100, 250]} />
+
+            {/* Dynamic Weather System - controlled by WeatherControl UI */}
+            <WeatherManager weather={activeWeather} />
 
             {/* ===== NEW: 17 APP-SPECIFIC ISLANDS IN CIRCULAR LAYOUT ===== */}
             <IslandWorld
@@ -2484,6 +2489,7 @@ export default function BrookvaleWorld() {
     const [toast, setToast] = useState<{ show: boolean; title: string; reward: string } | null>(null);
     const [characterData, setCharacterData] = useState<{ characterId: string; name: string } | null>(null);
     const [playerPosition, setPlayerPosition] = useState<[number, number, number]>([0, 0.5, 0]);
+    const [activeWeather, setActiveWeather] = useState<WeatherType>('clear');
 
     // Performance optimization
     const [isLoading, setIsLoading] = useState(true);
@@ -2772,6 +2778,7 @@ export default function BrookvaleWorld() {
                         keys={combinedKeys}
                         isMoving={combinedKeys.forward || combinedKeys.backward || combinedKeys.left || combinedKeys.right}
                         qualitySettings={qualitySettings}
+                        activeWeather={activeWeather}
                     />
                 </Suspense>
             </Canvas>
@@ -2783,7 +2790,42 @@ export default function BrookvaleWorld() {
             />
 
             {/* Weather Control - Manual weather selection */}
-            <WeatherControl />
+            <div className="weather-control" style={{
+                position: 'fixed',
+                top: '80px',
+                left: '20px',
+                background: 'rgba(255, 255, 255, 0.9)',
+                backdropFilter: 'blur(10px)',
+                padding: '12px',
+                borderRadius: '12px',
+                display: 'flex',
+                gap: '8px',
+                zIndex: 100,
+                boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+            }}>
+                {(['clear', 'cloudy', 'rainy', 'snowy', 'foggy', 'stormy'] as WeatherType[]).map(w => {
+                    const emoji = { clear: '☀️', cloudy: '☁️', rainy: '🌧️', snowy: '❄️', foggy: '🌫️', stormy: '⛈️' }[w];
+                    return (
+                        <button
+                            key={w}
+                            onClick={() => { setActiveWeather(w); setWeather(w); }}
+                            style={{
+                                width: '36px',
+                                height: '36px',
+                                border: activeWeather === w ? '2px solid #2196F3' : '2px solid transparent',
+                                borderRadius: '8px',
+                                background: activeWeather === w ? '#E3F2FD' : '#f5f5f5',
+                                cursor: 'pointer',
+                                fontSize: '18px',
+                                transition: 'all 0.2s',
+                            }}
+                            title={w}
+                        >
+                            {emoji}
+                        </button>
+                    );
+                })}
+            </div>
 
             {/* Performance Indicator - Shows current quality level */}
             <PerformanceIndicator level={performanceLevel} />
@@ -2796,8 +2838,8 @@ export default function BrookvaleWorld() {
                 </div>
 
                 {/* Character Settings Button */}
-                <a
-                    href="/character-settings"
+                <button
+                    onClick={() => navigateWithTransition('/character-settings')}
                     className="character-settings-btn"
                     style={{
                         position: 'absolute',
@@ -2814,6 +2856,8 @@ export default function BrookvaleWorld() {
                         color: '#2D6A4F',
                         fontWeight: 'bold',
                         fontSize: '14px',
+                        border: 'none',
+                        cursor: 'pointer',
                         boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
                         transition: 'all 0.3s ease',
                         zIndex: 1000,
@@ -2832,7 +2876,7 @@ export default function BrookvaleWorld() {
                         {!characterData && '🎭'}
                     </span>
                     <span>{characterData?.name || (language === 'ko' ? '캐릭터 설정' : 'My Character')}</span>
-                </a>
+                </button>
 
                 <div className="controls-hint mini">
                     🎮 WASD to move • Shift to run • 🖱️ Drag to rotate • Scroll to zoom
