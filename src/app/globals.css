@@ -1086,9 +1086,8 @@ body {
         inset 0 1px 0 rgba(255, 255, 255, 0.8);
     padding: 1.25rem;
     z-index: 1000;
-    /* Increased from 100 to prevent overlap with 3D emojis */
     pointer-events: auto;
-    overflow: hidden;
+    overflow-y: auto;
     animation: questPanelSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -1602,10 +1601,11 @@ body {
         left: 10px;
         width: auto;
         top: auto;
-        bottom: 80px;
+        bottom: 70px;
         transform: none;
-        max-height: 50vh;
+        max-height: calc(100vh - 140px);
         border-radius: 24px;
+        padding-bottom: 1.5rem;
     }
 
     .language-toggle {
