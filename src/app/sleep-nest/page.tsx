@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Language, defaultLanguage } from '@/lib/i18n';
 import { useAcornStore } from '@/lib/acorn-context';
 import { BackLink } from '@/components/BackLink';
+import { getAmbientSoundEngine, SoundType } from '@/lib/ambient-sounds';
 import './sleep-nest.css';
 
 // ==================== TYPES ====================
@@ -185,6 +186,24 @@ export default function SleepNestPage() {
 
     const { balance: totalAcorns, earn, isLoaded } = useAcornStore(language);
     const t = translations[language];
+    const soundEngineRef = useRef<ReturnType<typeof getAmbientSoundEngine> | null>(null);
+
+    // Ambient sound engine
+    useEffect(() => {
+        soundEngineRef.current = getAmbientSoundEngine();
+        return () => {
+            soundEngineRef.current?.dispose();
+            soundEngineRef.current = null;
+        };
+    }, []);
+
+    // Play ambient sound directly (must be called from click handler for mobile)
+    const handleSoundSelect = useCallback((soundId: string) => {
+        setSelectedSound(soundId);
+        if (soundEngineRef.current) {
+            soundEngineRef.current.play(soundId as SoundType);
+        }
+    }, []);
 
     // Load data
     useEffect(() => {
@@ -472,7 +491,7 @@ export default function SleepNestPage() {
                         <button
                             key={s.id}
                             className={`sound-btn ${selectedSound === s.id ? 'active' : ''}`}
-                            onClick={() => setSelectedSound(s.id)}
+                            onClick={() => handleSoundSelect(s.id)}
                         >
                             <span className="sound-emoji">{s.emoji}</span>
                             <span className="sound-name">{language === 'ko' ? s.ko : s.en}</span>
