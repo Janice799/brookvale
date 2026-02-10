@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { PageTransitionProvider } from "@/components/PageTransition";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
     title: "Brookvale - Living Pixel World",
@@ -41,6 +43,8 @@ export default function RootLayout({
                 <PageTransitionProvider>
                     {children}
                 </PageTransitionProvider>
+                <Analytics />
+                <SpeedInsights />
                 <script
                     dangerouslySetInnerHTML={{
                         __html: `
